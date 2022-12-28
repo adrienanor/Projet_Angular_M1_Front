@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import { AssignmentsService } from '../shared/assignments.service';
 import { Assignment } from './assignment.model';
+import {MatSort} from "@angular/material/sort";
 
 @Component({
   selector: 'app-assignments',
@@ -9,6 +10,8 @@ import { Assignment } from './assignment.model';
 })
 export class AssignmentsComponent implements OnInit {
   titre = 'Mon application sur les assignments';
+
+  displayedColumns: string[] = ['id', 'nom', 'dateDeRendu', 'rendu'];
 
   formVisible = false;
 

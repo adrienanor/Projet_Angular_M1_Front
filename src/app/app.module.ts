@@ -27,6 +27,7 @@ import {MatToolbarModule} from "@angular/material/toolbar";
 import {HttpClientModule} from "@angular/common/http";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatSidenavModule} from "@angular/material/sidenav";
+import {MatTableModule} from "@angular/material/table";
 
 const routes:Routes = [
   {path: '', component: AssignmentsComponent},
@@ -55,7 +56,7 @@ const routes:Routes = [
     MatDatepickerModule, MatNativeDateModule, MatListModule,
     MatCardModule, MatCheckboxModule, MatSlideToggleModule,
     FormsModule, HttpClientModule,
-    RouterModule.forRoot(routes), MatPaginatorModule, MatToolbarModule, MatSidenavModule
+    RouterModule.forRoot(routes), MatPaginatorModule, MatToolbarModule, MatSidenavModule, MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]
