@@ -29,6 +29,7 @@ import {MatSidenavModule} from "@angular/material/sidenav";
 import {MatTableModule} from "@angular/material/table";
 import {MatSortModule} from "@angular/material/sort";
 import {MatPaginatorModule} from "@angular/material/paginator";
+import {MatRadioModule} from "@angular/material/radio";
 
 const routes:Routes = [
   {path: '', component: AssignmentsComponent},
@@ -57,7 +58,7 @@ const routes:Routes = [
     MatDatepickerModule, MatNativeDateModule, MatListModule,
     MatCardModule, MatCheckboxModule, MatSlideToggleModule,
     FormsModule, HttpClientModule,
-    RouterModule.forRoot(routes), MatToolbarModule, MatSidenavModule, MatTableModule, MatSortModule, MatPaginatorModule
+    RouterModule.forRoot(routes), MatToolbarModule, MatSidenavModule, MatTableModule, MatSortModule, MatPaginatorModule, MatRadioModule
   ],
   providers: [],
   bootstrap: [AppComponent]

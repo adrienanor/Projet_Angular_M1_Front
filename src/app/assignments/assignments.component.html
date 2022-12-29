@@ -10,6 +10,22 @@
 
   <h1>Liste des devoirs à rendre (assignments) :</h1>
 
+  <mat-label style="margin: 0 10px;">Filtrer par rendu</mat-label>
+  <mat-radio-group [(ngModel)]="checked">
+    <mat-radio-button #activeTrue
+                      [value]="true"
+                      (click)="checkStateActive($event, activeTrue)" >
+      oui
+    </mat-radio-button>
+    <mat-radio-button #activeFalse
+                      [value]="false"
+                      (click)="checkStateActive($event, activeFalse)">
+      non
+    </mat-radio-button>
+  </mat-radio-group>
+
+  <div class="example-selected-value">Your favorite season is: {{checked}}</div>
+
   <mat-form-field appearance="standard">
     <mat-label>Filter</mat-label>
     <input matInput (keyup)="applyFilter($event)" placeholder="Search columns" #input>

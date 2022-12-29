@@ -10,15 +10,9 @@ import {MatTableDataSource} from "@angular/material/table";
   styleUrls: ['./assignments.component.css'],
 })
 export class AssignmentsComponent implements OnInit, AfterViewInit {
-  // titre = 'Mon application sur les assignments';
   assignments!: Assignment[];
-
-  // assignmentSelectionne!: Assignment;
-
-  dataSource = new MatTableDataSource(this.assignments);
-
+  dataSource!: MatTableDataSource<Assignment>;
   displayedColumns: string[] = ['id', 'nom', 'dateDeRendu', 'rendu'];
-
   dateDeRendu!: Date;
   page: number = 1;
   limit: number = 10;
@@ -28,9 +22,12 @@ export class AssignmentsComponent implements OnInit, AfterViewInit {
   prevPage!: number;
   hasNextPage!: boolean;
   nextPage!: number;
+  checked = "";
 
 
-  constructor(private assignmentsService: AssignmentsService) {}
+  constructor(private assignmentsService: AssignmentsService) {
+    this.dataSource = new MatTableDataSource(this.assignments);
+  }
 
   @ViewChild(MatSort) sort!: MatSort;
 
@@ -49,8 +46,16 @@ export class AssignmentsComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.dataSource.filterPredicate = function(data, filter: string): boolean {
-      return data.nom.toLowerCase().includes(filter);
+    this.dataSource.filterPredicate = (data, filter: string) => {
+      //return data.nom.toLowerCase().includes(filter);
+      console.log(filter);
+      if(filter != null && (filter == "true" || filter == "false")){
+        return data.rendu.toString() == filter;
+      } else if(filter != null && filter != "") {
+        return data.nom.toLowerCase().includes(filter);
+      } else {
+        return true;
+      }
     };
 
     this.assignmentsService.getAssignmentsPagine(this.page, this.limit)
@@ -69,10 +74,6 @@ export class AssignmentsComponent implements OnInit, AfterViewInit {
       });
 
   }
-
-  // onAssignmentClicke(assignment: Assignment) {
-  //   this.assignmentSelectionne = assignment;
-  // }
 
   getDataByPage(page: number, limit: number) {
     this.assignmentsService.getAssignmentsPagine(page, limit)
@@ -97,6 +98,30 @@ export class AssignmentsComponent implements OnInit, AfterViewInit {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  applyFilterCheckBox(event: string) {
+    this.dataSource.filter = event.toString();
+  }
+
+  isNull(elem?: any): boolean{
+    return undefined === elem || null === elem;
+  }
+
+  isNotNull(elem?: any): boolean{
+    return !this.isNull(elem);
+  }
+
+  checkStateActive(event: any, el: any) {
+    event.preventDefault();
+    if (this.isNotNull(this.checked) && this.checked === el.value) {
+      el.checked = false;
+      this.checked = "";
+    } else {
+      el.checked = true;
+      this.checked = el.value;
+    }
+    this.applyFilterCheckBox(this.checked);
   }
 }
 
