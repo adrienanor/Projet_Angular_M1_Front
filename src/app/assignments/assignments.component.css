@@ -5,12 +5,3 @@
 .AjouterBtn {
   align-self: flex-end;
 }
-
-mat-sidenav-container {
-  height: calc(205vh - 115vh);
-}
-
-mat-sidenav {
-  width: 400px;
-  background-color: #eee;
-}

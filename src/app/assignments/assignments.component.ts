@@ -1,22 +1,24 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import { AssignmentsService } from '../shared/assignments.service';
 import { Assignment } from './assignment.model';
 import {MatSort} from "@angular/material/sort";
+import {MatTableDataSource} from "@angular/material/table";
 
 @Component({
   selector: 'app-assignments',
   templateUrl: './assignments.component.html',
   styleUrls: ['./assignments.component.css'],
 })
-export class AssignmentsComponent implements OnInit {
-  titre = 'Mon application sur les assignments';
+export class AssignmentsComponent implements OnInit, AfterViewInit {
+  // titre = 'Mon application sur les assignments';
+  assignments!: Assignment[];
+
+  // assignmentSelectionne!: Assignment;
+
+  dataSource = new MatTableDataSource(this.assignments);
 
   displayedColumns: string[] = ['id', 'nom', 'dateDeRendu', 'rendu'];
 
-  formVisible = false;
-
-  ajoutActive = false;
-  nomDevoir: string = '';
   dateDeRendu!: Date;
   page: number = 1;
   limit: number = 10;
@@ -27,11 +29,24 @@ export class AssignmentsComponent implements OnInit {
   hasNextPage!: boolean;
   nextPage!: number;
 
-  assignments!: Assignment[];
-
-  assignmentSelectionne!: Assignment;
 
   constructor(private assignmentsService: AssignmentsService) {}
+
+  @ViewChild(MatSort) sort!: MatSort;
+
+  ngAfterViewInit(): void {
+    this.dataSource.sort = this.sort;
+    this.dataSource.sortingDataAccessor = (item: IIndexable, property) => {
+      switch (property) {
+        case 'id': {
+          if (item['id']) { return item['id']; }
+          break;
+        }
+        default:
+          return item[property];
+      }
+    };
+  }
 
   ngOnInit(): void {
     this.assignmentsService.getAssignmentsPagine(this.page, this.limit)
@@ -46,13 +61,14 @@ export class AssignmentsComponent implements OnInit {
         this.hasNextPage = data.hasNextPage;
         this.nextPage = data.nextPage;
         console.log("données reçues");
+        this.dataSource.data = this.assignments;
       });
 
   }
 
-  onAssignmentClicke(assignment: Assignment) {
-    this.assignmentSelectionne = assignment;
-  }
+  // onAssignmentClicke(assignment: Assignment) {
+  //   this.assignmentSelectionne = assignment;
+  // }
 
   getDataByPage(page: number, limit: number) {
     this.assignmentsService.getAssignmentsPagine(page, limit)
@@ -66,10 +82,15 @@ export class AssignmentsComponent implements OnInit {
         this.prevPage = data.prevPage;
         this.hasNextPage = data.hasNextPage;
         this.nextPage = data.nextPage;
+        this.dataSource.data = this.assignments;
       });
   }
 
   updatePage(event: any) {
     this.getDataByPage(event.pageIndex + 1, event.pageSize);
   }
+}
+
+export interface IIndexable {
+  [key: string]: any;
 }

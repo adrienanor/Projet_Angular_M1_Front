@@ -25,9 +25,10 @@ import { EditAssignmentComponent } from './assignments/edit-assignment/edit-assi
 import { AuthGuard } from './shared/auth.guard';
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {HttpClientModule} from "@angular/common/http";
-import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatSidenavModule} from "@angular/material/sidenav";
 import {MatTableModule} from "@angular/material/table";
+import {MatSortModule} from "@angular/material/sort";
+import {MatPaginatorModule} from "@angular/material/paginator";
 
 const routes:Routes = [
   {path: '', component: AssignmentsComponent},
@@ -56,7 +57,7 @@ const routes:Routes = [
     MatDatepickerModule, MatNativeDateModule, MatListModule,
     MatCardModule, MatCheckboxModule, MatSlideToggleModule,
     FormsModule, HttpClientModule,
-    RouterModule.forRoot(routes), MatPaginatorModule, MatToolbarModule, MatSidenavModule, MatTableModule
+    RouterModule.forRoot(routes), MatToolbarModule, MatSidenavModule, MatTableModule, MatSortModule, MatPaginatorModule
   ],
   providers: [],
   bootstrap: [AppComponent]

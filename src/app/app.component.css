@@ -1,3 +1,12 @@
 .example-spacer {
   flex: 1 1 auto;
 }
+
+.mat-sidenav-container {
+  height: calc(205vh - 115vh);
+}
+
+.mat-sidenav {
+  width: 200px;
+  background-color: #eee;
+}
