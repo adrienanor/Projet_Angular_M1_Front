@@ -49,6 +49,10 @@ export class AssignmentsComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+    this.dataSource.filterPredicate = function(data, filter: string): boolean {
+      return data.nom.toLowerCase().includes(filter);
+    };
+
     this.assignmentsService.getAssignmentsPagine(this.page, this.limit)
       .subscribe(data => {
         this.assignments = data.docs;
@@ -88,6 +92,11 @@ export class AssignmentsComponent implements OnInit, AfterViewInit {
 
   updatePage(event: any) {
     this.getDataByPage(event.pageIndex + 1, event.pageSize);
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 }
 
