@@ -8,5 +8,18 @@
 
 .mat-sidenav {
   width: 200px;
-  background-color: #eee;
+  background-color: #3f4d66;
+}
+
+.menu{
+  background-color: #3f4d66;
+  color: #fff;
+}
+
+.mat-toolbar.mat-primary {
+  background: #24b7e5;
+}
+
+.mat-list-item{
+  color: #fff;
 }
