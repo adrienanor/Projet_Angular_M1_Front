@@ -10,23 +10,24 @@
 
   <h1>Liste des devoirs à rendre (assignments) :</h1>
 
-  <mat-label style="margin: 0 10px;">Filtrer par rendu</mat-label>
-  <mat-radio-group [(ngModel)]="checked">
-    <mat-radio-button #activeTrue
-                      [value]="true"
-                      (click)="checkStateActive($event, activeTrue)" >
-      oui
-    </mat-radio-button>
-    <mat-radio-button #activeFalse
-                      [value]="false"
-                      (click)="checkStateActive($event, activeFalse)">
-      non
-    </mat-radio-button>
-  </mat-radio-group>
+  <div style="padding-left: 20px">
+    <mat-label>Filtrer par rendu : </mat-label>
+    <mat-radio-group [(ngModel)]="checked">
+      <mat-radio-button #activeTrue
+                        style="padding-right: 10px"
+                        [value]="true"
+                        (click)="checkStateActive($event, activeTrue)" >
+        oui
+      </mat-radio-button>
+      <mat-radio-button #activeFalse
+                        [value]="false"
+                        (click)="checkStateActive($event, activeFalse)">
+        non
+      </mat-radio-button>
+    </mat-radio-group>
+  </div>
 
-  <div class="example-selected-value">Your favorite season is: {{checked}}</div>
-
-  <mat-form-field appearance="standard">
+  <mat-form-field class="searchBar" appearance="standard">
     <mat-label>Filter</mat-label>
     <input matInput (keyup)="applyFilter($event)" placeholder="Search columns" #input>
   </mat-form-field>
@@ -38,17 +39,17 @@
     </ng-container>
 
     <ng-container matColumnDef="nom">
-      <th mat-header-cell *matHeaderCellDef> Nom </th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Nom </th>
       <td mat-cell *matCellDef="let element"> {{element.nom}} </td>
     </ng-container>
 
     <ng-container matColumnDef="dateDeRendu">
-      <th mat-header-cell *matHeaderCellDef> DateDeRendu </th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> DateDeRendu </th>
       <td mat-cell *matCellDef="let element"> {{element.dateDeRendu}} </td>
     </ng-container>
 
     <ng-container matColumnDef="rendu">
-      <th mat-header-cell *matHeaderCellDef> rendu </th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> rendu </th>
       <td mat-cell *matCellDef="let element"> {{element.rendu}} </td>
     </ng-container>
 

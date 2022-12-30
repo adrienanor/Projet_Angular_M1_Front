@@ -9,7 +9,7 @@ import { AuthService } from './shared/auth.service';
 })
 export class AppComponent {
   title = 'Application de gestion des assignments !!!';
-  opened = false;
+  opened = true;
 
   constructor(private authService:AuthService, private router:Router) {}
 

@@ -5,3 +5,12 @@
 .AjouterBtn {
   align-self: flex-end;
 }
+
+.mat-elevation-z8{
+  margin: 20px;
+}
+
+.searchBar{
+  padding-left: 20px;
+  padding-right: 20px;
+}
