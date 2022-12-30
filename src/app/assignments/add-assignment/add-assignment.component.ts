@@ -1,19 +1,36 @@
 import { Component, OnInit } from '@angular/core';
 import { AssignmentsService } from 'src/app/shared/assignments.service';
 import { Assignment } from '../assignment.model';
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {STEPPER_GLOBAL_OPTIONS} from "@angular/cdk/stepper";
 
 @Component({
   selector: 'app-add-assignment',
   templateUrl: './add-assignment.component.html',
   styleUrls: ['./add-assignment.component.css'],
+  providers: [
+    {
+      provide: STEPPER_GLOBAL_OPTIONS,
+      useValue: {showError: true},
+    },
+  ],
 })
 export class AddAssignmentComponent implements OnInit {
   nomDevoir: string = '';
   dateDeRendu!: Date;
+  firstFormGroup!: FormGroup;
+  secondFormGroup!: FormGroup;
 
-  constructor(private assignmentsService:AssignmentsService) {}
+  constructor(private assignmentsService:AssignmentsService, private formBuilder: FormBuilder) {}
 
-  ngOnInit(): void {}
+  ngOnInit() {
+    this.firstFormGroup = this.formBuilder.group({
+      firstCtrl: ['', Validators.required]
+    });
+    this.secondFormGroup = this.formBuilder.group({
+      secondCtrl: ['', Validators.required]
+    });
+  }
 
   onSubmit() {
     console.log(this.nomDevoir + ' a rendre le ' + this.dateDeRendu);

@@ -18,7 +18,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { AssignmentsComponent } from './assignments/assignments.component';
 import { AssignmentsDetailsComponent } from './assignments/assignments-details/assignments-details.component';
 import { RenduDirective } from './shared/rendu.directive';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { AddAssignmentComponent } from './assignments/add-assignment/add-assignment.component';
 import { RouterModule, Routes } from '@angular/router';
 import { EditAssignmentComponent } from './assignments/edit-assignment/edit-assignment.component';
@@ -30,6 +30,7 @@ import {MatTableModule} from "@angular/material/table";
 import {MatSortModule} from "@angular/material/sort";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatRadioModule} from "@angular/material/radio";
+import {MatStepperModule} from "@angular/material/stepper";
 
 const routes:Routes = [
   {path: '', component: AssignmentsComponent},
@@ -58,7 +59,7 @@ const routes:Routes = [
     MatDatepickerModule, MatNativeDateModule, MatListModule,
     MatCardModule, MatCheckboxModule, MatSlideToggleModule,
     FormsModule, HttpClientModule,
-    RouterModule.forRoot(routes), MatToolbarModule, MatSidenavModule, MatTableModule, MatSortModule, MatPaginatorModule, MatRadioModule
+    RouterModule.forRoot(routes), MatToolbarModule, MatSidenavModule, MatTableModule, MatSortModule, MatPaginatorModule, MatRadioModule, MatStepperModule, ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,14 +1,56 @@
-<form ngForm (submit)="onSubmit(); assignmentForm.reset()" #assignmentForm class="form">
-  <mat-form-field>
-    <input matInput [(ngModel)]="nomDevoir" name="nom" placeholder="Nom du devoir" required>
-  </mat-form-field>
-  <mat-form-field appearance="fill">
-    <input matInput [matDatepicker]="picker" placeholder="Date de rendu" [(ngModel)]="dateDeRendu" name="date" required>
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
-  </mat-form-field>
+<!--<form ngForm (submit)="onSubmit(); assignmentForm.reset()" #assignmentForm class="form">-->
+<!--  <mat-form-field>-->
+<!--    <input matInput [(ngModel)]="nomDevoir" name="nom" placeholder="Nom du devoir" required>-->
+<!--  </mat-form-field>-->
+<!--  <mat-form-field appearance="fill">-->
+<!--    <input matInput [matDatepicker]="picker" placeholder="Date de rendu" [(ngModel)]="dateDeRendu" name="date" required>-->
+<!--    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>-->
+<!--    <mat-datepicker #picker></mat-datepicker>-->
+<!--  </mat-form-field>-->
 
-  <button mat-stroked-button color="primary">
-    Ajouter un devoir
-  </button>
-</form>
+<!--  <button mat-stroked-button color="primary">-->
+<!--    Ajouter un devoir-->
+<!--  </button>-->
+<!--</form>-->
+<mat-stepper #stepper>
+  <form ngForm (submit)="onSubmit(); assignmentForm.reset()" #assignmentForm class="form">
+    <mat-step [stepControl]="firstFormGroup" errorMessage="Le nom est requis.">
+      <div [formGroup]="firstFormGroup">
+        <ng-template matStepLabel>Remplissez le nom </ng-template>
+        <mat-form-field appearance="fill">
+          <mat-label>Nom du devoir</mat-label>
+          <input matInput [(ngModel)]="nomDevoir" formControlName="firstCtrl" required>
+        </mat-form-field>
+        <div><button mat-button matStepperNext>Suivant</button></div>
+      </div>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup" errorMessage="La date de rendu est requise.">
+      <div [formGroup]="secondFormGroup">
+        <ng-template matStepLabel>Remplissez la date de rendu</ng-template>
+        <mat-form-field appearance="fill">
+          <input matInput formControlName="secondCtrl" [matDatepicker]="picker" placeholder="Date de rendu" [(ngModel)]="dateDeRendu" name="date" required>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperPrevious>Précédent</button>
+          <button mat-button matStepperNext>Suivant</button>
+        </div>
+      </div>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Done</ng-template>
+      <p>You are now done.</p>
+        <button mat-stroked-button color="primary">
+          Ajouter un devoir
+        </button>
+      <div>
+        <button mat-button matStepperPrevious>Précédent</button>
+        <button mat-button (click)="stepper.reset()">Reset</button>
+        <button mat-stroked-button (click)="onSubmit()" color="primary">Ajouter un devoir</button>
+      </div>
+    </mat-step>
+  </form>
+</mat-stepper>
+
+
