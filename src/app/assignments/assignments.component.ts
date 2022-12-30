@@ -3,6 +3,7 @@ import { AssignmentsService } from '../shared/assignments.service';
 import { Assignment } from './assignment.model';
 import {MatSort} from "@angular/material/sort";
 import {MatTableDataSource} from "@angular/material/table";
+import {formatDate} from "@angular/common";
 
 @Component({
   selector: 'app-assignments',
