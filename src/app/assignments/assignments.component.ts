@@ -4,6 +4,7 @@ import { Assignment } from './assignment.model';
 import {MatSort} from "@angular/material/sort";
 import {MatTableDataSource} from "@angular/material/table";
 import {formatDate} from "@angular/common";
+import {MatPaginator} from "@angular/material/paginator";
 
 @Component({
   selector: 'app-assignments',
@@ -25,14 +26,31 @@ export class AssignmentsComponent implements OnInit, AfterViewInit {
   nextPage!: number;
   checked = "";
 
+  @ViewChild(MatSort) sort!: MatSort
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(private assignmentsService: AssignmentsService) {
-    this.dataSource = new MatTableDataSource(this.assignments);
-  }
-
-  @ViewChild(MatSort) sort!: MatSort;
+    this.assignmentsService.getAssignmentsPagine(this.page, this.limit)
+      .subscribe(data => {
+        this.assignments = data.docs;
+        this.page = data.page;
+        this.limit = data.limit;
+        this.totalDocs = data.totalDocs;
+        this.totalPages = data.totalPages;
+        this.hasPrevPage = data.hasPrevPage;
+        this.prevPage = data.prevPage;
+        this.hasNextPage = data.hasNextPage;
+        this.nextPage = data.nextPage;
+        this.dataSource = new MatTableDataSource(data);
+        this.dataSource.paginator = this.paginator;
+      });
+    }
+    // this.assignmentsService.getAssignmentsPagine(this.page, this.limit).subscribe(data => {
+    //   this.dataSource = new MatTableDataSource(data);
+    // })
 
   ngAfterViewInit(): void {
+    this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
     this.dataSource.sortingDataAccessor = (item: IIndexable, property) => {
       switch (property) {
@@ -99,6 +117,9 @@ export class AssignmentsComponent implements OnInit, AfterViewInit {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 
   applyFilterCheckBox(event: string) {
