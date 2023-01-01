@@ -40,14 +40,10 @@
     </mat-step>
     <mat-step>
       <ng-template matStepLabel>Done</ng-template>
-      <p>You are now done.</p>
-        <button mat-stroked-button color="primary">
-          Ajouter un devoir
-        </button>
+      <button mat-stroked-button (click)="onSubmit()" color="primary">Ajouter un devoir</button>
       <div>
         <button mat-button matStepperPrevious>Précédent</button>
         <button mat-button (click)="stepper.reset()">Reset</button>
-        <button mat-stroked-button (click)="onSubmit()" color="primary">Ajouter un devoir</button>
       </div>
     </mat-step>
   </form>
