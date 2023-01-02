@@ -43,6 +43,7 @@ export class AssignmentsComponent implements OnInit, AfterViewInit {
         this.hasNextPage = data.hasNextPage;
         this.nextPage = data.nextPage;
         this.dataSource = new MatTableDataSource(data);
+        this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
       });
     }
@@ -97,25 +98,25 @@ export class AssignmentsComponent implements OnInit, AfterViewInit {
 
   }
 
-  getDataByPage(page: number, limit: number) {
-    this.assignmentsService.getAssignmentsPagine(page, limit)
-      .subscribe(data => {
-        this.assignments = data.docs;
-        this.page = data.page;
-        this.limit = data.limit;
-        this.totalDocs = data.totalDocs;
-        this.totalPages = data.totalPages;
-        this.hasPrevPage = data.hasPrevPage;
-        this.prevPage = data.prevPage;
-        this.hasNextPage = data.hasNextPage;
-        this.nextPage = data.nextPage;
-        this.dataSource.data = this.assignments;
-      });
-  }
-
-  updatePage(event: any) {
-    this.getDataByPage(event.pageIndex + 1, event.pageSize);
-  }
+  // getDataByPage(page: number, limit: number) {
+  //   this.assignmentsService.getAssignmentsPagine(page, limit)
+  //     .subscribe(data => {
+  //       this.assignments = data.docs;
+  //       this.page = data.page;
+  //       this.limit = data.limit;
+  //       this.totalDocs = data.totalDocs;
+  //       this.totalPages = data.totalPages;
+  //       this.hasPrevPage = data.hasPrevPage;
+  //       this.prevPage = data.prevPage;
+  //       this.hasNextPage = data.hasNextPage;
+  //       this.nextPage = data.nextPage;
+  //       this.dataSource.data = this.assignments;
+  //     });
+  // }
+  //
+  // updatePage(event: any) {
+  //   this.getDataByPage(event.pageIndex + 1, event.pageSize);
+  // }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
