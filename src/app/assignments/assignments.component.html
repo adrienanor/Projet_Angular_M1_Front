@@ -43,7 +43,7 @@
     <ng-container matColumnDef="rendu">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Rendu </th>
 
-      <td mat-cell *matCellDef="let element" style="text-align: center ">
+      <td mat-cell *matCellDef="let element" style="padding-left: 8px">
         <mat-icon *ngIf="element.rendu === true" style="color:green;">check_circle</mat-icon>
         <mat-icon *ngIf="element.rendu === false" style="color: red;">cancel</mat-icon>
       </td>

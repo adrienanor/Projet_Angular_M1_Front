@@ -29,6 +29,7 @@ export class AssignmentsComponent implements OnInit, AfterViewInit {
 
   @ViewChild(MatSort) sort!: MatSort
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  private dsData: any;
 
   constructor(private assignmentsService: AssignmentsService, private router:Router) {
     this.assignmentsService.getAssignmentsPagine(this.page, this.limit)
@@ -162,16 +163,11 @@ export class AssignmentsComponent implements OnInit, AfterViewInit {
           this.router.navigate(['/home']);
         });
     });
-    //
-    // if (!this.assignmentTransmis) return;
-    //
-    // this.assignmentService
-    //   .deleteAssignement(this.assignmentTransmis)
-    //   .subscribe((message) => {
-    //     console.log(message);
-    //     this.assignmentTransmis = undefined;
-    //     this.router.navigate(['/home']);
-    //   });
+
+    this.dsData = this.dataSource.data;
+    const itemIndex = this.dsData.findIndex((obj: number[]) => obj[id] === id);
+    this.dataSource.data.splice(itemIndex, 1);
+    this.dataSource.paginator = this.paginator;
   }
 }
 
