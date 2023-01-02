@@ -18,6 +18,8 @@ import {STEPPER_GLOBAL_OPTIONS} from "@angular/cdk/stepper";
 export class AddAssignmentComponent implements OnInit {
   nomDevoir: string = '';
   dateDeRendu!: Date;
+  auteur: string = '';
+  matiere: string = '';
   firstFormGroup!: FormGroup;
   secondFormGroup!: FormGroup;
 
@@ -38,6 +40,8 @@ export class AddAssignmentComponent implements OnInit {
     newAssignment.id = Math.floor(Math.random() * 1000);
     newAssignment.nom = this.nomDevoir;
     newAssignment.dateDeRendu = this.dateDeRendu;
+    newAssignment.auteur = this.auteur;
+    newAssignment.matiere = this.matiere;
     newAssignment.rendu = false;
 
     this.assignmentsService.addAssignment(newAssignment)

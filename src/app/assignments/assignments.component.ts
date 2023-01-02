@@ -5,6 +5,7 @@ import {MatSort} from "@angular/material/sort";
 import {MatTableDataSource} from "@angular/material/table";
 import {formatDate} from "@angular/common";
 import {MatPaginator} from "@angular/material/paginator";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-assignments',
@@ -14,7 +15,7 @@ import {MatPaginator} from "@angular/material/paginator";
 export class AssignmentsComponent implements OnInit, AfterViewInit {
   assignments!: Assignment[];
   dataSource!: MatTableDataSource<Assignment>;
-  displayedColumns: string[] = ['id', 'nom', 'dateDeRendu', 'rendu'];
+  displayedColumns: string[] = ['id', 'nom', 'dateDeRendu', 'auteur', 'matiere', 'rendu', 'note', 'remarque', 'action'];
   dateDeRendu!: Date;
   page: number = 1;
   limit: number = 10;
@@ -29,7 +30,7 @@ export class AssignmentsComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort!: MatSort
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private assignmentsService: AssignmentsService) {
+  constructor(private assignmentsService: AssignmentsService, private router:Router) {
     this.assignmentsService.getAssignmentsPagine(this.page, this.limit)
       .subscribe(data => {
         this.assignments = data.docs;
@@ -50,6 +51,7 @@ export class AssignmentsComponent implements OnInit, AfterViewInit {
     // })
 
   ngAfterViewInit(): void {
+    // if(!this.dataSource) return;
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
     this.dataSource.sortingDataAccessor = (item: IIndexable, property) => {
@@ -65,6 +67,7 @@ export class AssignmentsComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+    // if(!this.dataSource) return;
     this.dataSource.filterPredicate = (data, filter: string) => {
       //return data.nom.toLowerCase().includes(filter);
       console.log(filter);
@@ -144,6 +147,30 @@ export class AssignmentsComponent implements OnInit, AfterViewInit {
       this.checked = el.value;
     }
     this.applyFilterCheckBox(this.checked);
+  }
+
+  onDelete(id: number) {
+    this.assignmentsService.getAssignment(id).subscribe((assignment) => {
+      if (!assignment) return;
+
+      this.assignmentsService
+        .deleteAssignement(assignment)
+        .subscribe((message) => {
+          console.log(message);
+          assignment = undefined;
+          this.router.navigate(['/home']);
+        });
+    });
+    //
+    // if (!this.assignmentTransmis) return;
+    //
+    // this.assignmentService
+    //   .deleteAssignement(this.assignmentTransmis)
+    //   .subscribe((message) => {
+    //     console.log(message);
+    //     this.assignmentTransmis = undefined;
+    //     this.router.navigate(['/home']);
+    //   });
   }
 }
 

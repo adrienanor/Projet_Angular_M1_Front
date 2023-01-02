@@ -10,6 +10,11 @@
       </mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Edition de la matiere" [(ngModel)]="matiere" name="matiere">
+    </mat-form-field>
+  
+
 
     <button mat-raised-button color="primary" [disabled]="((!nomAssignment)||(!dateDeRendu))">
       Sauver
