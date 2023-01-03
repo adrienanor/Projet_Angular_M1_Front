@@ -5,6 +5,8 @@ import {MatSort} from "@angular/material/sort";
 import {MatTableDataSource} from "@angular/material/table";
 import {MatPaginator} from "@angular/material/paginator";
 import {Router} from "@angular/router";
+import {MatDialog} from "@angular/material/dialog";
+import {EditAssignmentComponent} from "./edit-assignment/edit-assignment.component";
 
 @Component({
   selector: 'app-assignments',
@@ -29,7 +31,8 @@ export class AssignmentsComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort!: MatSort
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private assignmentsService: AssignmentsService, private router:Router) {
+  constructor(private assignmentsService: AssignmentsService,
+              private router:Router) {
     this.assignmentsService.getAssignmentsPagine(this.page, this.limit)
       .subscribe(data => {
         this.assignments = data.docs;

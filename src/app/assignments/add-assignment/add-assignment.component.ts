@@ -23,6 +23,7 @@ export class AddAssignmentComponent implements OnInit {
   matiere: string = '';
   firstFormGroup!: FormGroup;
   secondFormGroup!: FormGroup;
+  thirdFormGroup!: FormGroup;
 
   constructor(private assignmentsService:AssignmentsService, private formBuilder: FormBuilder, private router:Router) {}
 
@@ -32,6 +33,9 @@ export class AddAssignmentComponent implements OnInit {
     });
     this.secondFormGroup = this.formBuilder.group({
       secondCtrl: ['', Validators.required]
+    });
+    this.thirdFormGroup = this.formBuilder.group({
+      thirdCtrl: ['', Validators.required]
     });
   }
 
