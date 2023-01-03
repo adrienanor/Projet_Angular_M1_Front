@@ -3,6 +3,7 @@ import { AssignmentsService } from 'src/app/shared/assignments.service';
 import { Assignment } from '../assignment.model';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {STEPPER_GLOBAL_OPTIONS} from "@angular/cdk/stepper";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-add-assignment',
@@ -23,7 +24,7 @@ export class AddAssignmentComponent implements OnInit {
   firstFormGroup!: FormGroup;
   secondFormGroup!: FormGroup;
 
-  constructor(private assignmentsService:AssignmentsService, private formBuilder: FormBuilder) {}
+  constructor(private assignmentsService:AssignmentsService, private formBuilder: FormBuilder, private router:Router) {}
 
   ngOnInit() {
     this.firstFormGroup = this.formBuilder.group({
@@ -47,6 +48,7 @@ export class AddAssignmentComponent implements OnInit {
     this.assignmentsService.addAssignment(newAssignment)
       .subscribe(message => {
         console.log(message);
+        this.router.navigate(['/home']);
       });
   }
 }

@@ -3,9 +3,8 @@ import { AssignmentsService } from '../shared/assignments.service';
 import { Assignment } from './assignment.model';
 import {MatSort} from "@angular/material/sort";
 import {MatTableDataSource} from "@angular/material/table";
-import {formatDate} from "@angular/common";
 import {MatPaginator} from "@angular/material/paginator";
-import {ActivatedRoute, Router} from "@angular/router";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-assignments',
@@ -43,15 +42,13 @@ export class AssignmentsComponent implements OnInit, AfterViewInit {
         this.hasNextPage = data.hasNextPage;
         this.nextPage = data.nextPage;
         this.dataSource = new MatTableDataSource(data);
+        this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
       });
-    }
-    // this.assignmentsService.getAssignmentsPagine(this.page, this.limit).subscribe(data => {
-    //   this.dataSource = new MatTableDataSource(data);
-    // })
+  }
 
   ngAfterViewInit(): void {
-    // if(!this.dataSource) return;
+    if(!this.dataSource) return;
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
     this.dataSource.sortingDataAccessor = (item: IIndexable, property) => {
@@ -67,7 +64,7 @@ export class AssignmentsComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    // if(!this.dataSource) return;
+    if(!this.dataSource) return;
     this.dataSource.filterPredicate = (data, filter: string) => {
       //return data.nom.toLowerCase().includes(filter);
       console.log(filter);
@@ -95,26 +92,6 @@ export class AssignmentsComponent implements OnInit, AfterViewInit {
         this.dataSource.data = this.assignments;
       });
 
-  }
-
-  getDataByPage(page: number, limit: number) {
-    this.assignmentsService.getAssignmentsPagine(page, limit)
-      .subscribe(data => {
-        this.assignments = data.docs;
-        this.page = data.page;
-        this.limit = data.limit;
-        this.totalDocs = data.totalDocs;
-        this.totalPages = data.totalPages;
-        this.hasPrevPage = data.hasPrevPage;
-        this.prevPage = data.prevPage;
-        this.hasNextPage = data.hasNextPage;
-        this.nextPage = data.nextPage;
-        this.dataSource.data = this.assignments;
-      });
-  }
-
-  updatePage(event: any) {
-    this.getDataByPage(event.pageIndex + 1, event.pageSize);
   }
 
   applyFilter(event: Event) {
@@ -157,20 +134,11 @@ export class AssignmentsComponent implements OnInit, AfterViewInit {
         .deleteAssignement(assignment)
         .subscribe((message) => {
           console.log(message);
-          assignment = undefined;
-          this.router.navigate(['/home']);
+          this.dataSource.data = this.dataSource.data.filter(
+            (a: Assignment) => a.id !== id
+          );
         });
     });
-    //
-    // if (!this.assignmentTransmis) return;
-    //
-    // this.assignmentService
-    //   .deleteAssignement(this.assignmentTransmis)
-    //   .subscribe((message) => {
-    //     console.log(message);
-    //     this.assignmentTransmis = undefined;
-    //     this.router.navigate(['/home']);
-    //   });
   }
 }
 
