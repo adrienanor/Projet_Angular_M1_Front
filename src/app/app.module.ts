@@ -31,6 +31,7 @@ import {MatSortModule} from "@angular/material/sort";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatRadioModule} from "@angular/material/radio";
 import {MatStepperModule} from "@angular/material/stepper"
+import {MatDialogModule} from "@angular/material/dialog";
 
 export const MY_FORMAT: MatDateFormats = {
   parse: {
@@ -71,7 +72,9 @@ const routes:Routes = [
     MatDatepickerModule, MatNativeDateModule, MatListModule,
     MatCardModule, MatCheckboxModule, MatSlideToggleModule,
     FormsModule, HttpClientModule,
-    RouterModule.forRoot(routes), MatToolbarModule, MatSidenavModule, MatTableModule, MatSortModule, MatPaginatorModule, MatRadioModule, MatStepperModule, ReactiveFormsModule
+    RouterModule.forRoot(routes), MatToolbarModule, MatSidenavModule, MatTableModule,
+    MatSortModule, MatPaginatorModule, MatRadioModule, MatStepperModule, ReactiveFormsModule,
+    MatDialogModule,
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'fr-FR' },

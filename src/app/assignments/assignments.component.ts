@@ -32,22 +32,8 @@ export class AssignmentsComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(private assignmentsService: AssignmentsService,
-              private router:Router) {
-    this.assignmentsService.getAssignmentsPagine(this.page, this.limit)
-      .subscribe(data => {
-        this.assignments = data.docs;
-        this.page = data.page;
-        this.limit = data.limit;
-        this.totalDocs = data.totalDocs;
-        this.totalPages = data.totalPages;
-        this.hasPrevPage = data.hasPrevPage;
-        this.prevPage = data.prevPage;
-        this.hasNextPage = data.hasNextPage;
-        this.nextPage = data.nextPage;
-        this.dataSource = new MatTableDataSource(data);
-        this.dataSource.sort = this.sort;
-        this.dataSource.paginator = this.paginator;
-      });
+              public dialog: MatDialog) {
+    this.refreshTable();
   }
 
   ngAfterViewInit(): void {
@@ -141,6 +127,35 @@ export class AssignmentsComponent implements OnInit, AfterViewInit {
             (a: Assignment) => a.id !== id
           );
         });
+    });
+  }
+
+  refreshTable() {
+    this.assignmentsService.getAssignmentsPagine(this.page, this.limit)
+      .subscribe(data => {
+        this.assignments = data.docs;
+        this.page = data.page;
+        this.limit = data.limit;
+        this.totalDocs = data.totalDocs;
+        this.totalPages = data.totalPages;
+        this.hasPrevPage = data.hasPrevPage;
+        this.prevPage = data.prevPage;
+        this.hasNextPage = data.hasNextPage;
+        this.nextPage = data.nextPage;
+        this.dataSource = new MatTableDataSource(data);
+        this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator;
+      });
+  }
+
+  openEdit(id: number) {
+    const dialogRef = this.dialog.open(EditAssignmentComponent, {
+      data: {id},
+    });
+
+    dialogRef.afterClosed().subscribe((result: any) => {
+      console.log(`Dialog result: ${result}`)
+      this.refreshTable();
     });
   }
 }

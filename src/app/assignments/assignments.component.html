@@ -1,6 +1,6 @@
 <main class="container">
 
-  <h1>Liste des devoirs à rendre (assignments) :</h1>
+  <h1 style="padding-left: 20px">Liste des devoirs :</h1>
 
   <div style="padding-left: 20px">
     <mat-label>Filtrer par rendu : </mat-label>
@@ -75,7 +75,7 @@
         <button mat-button routerLink="/assignment/{{element.id}}" routerLinkActive="active">
           <mat-icon style="color: cornflowerblue;">assignment</mat-icon>
         </button>
-        <button mat-button routerLink="/assignment/{{element.id}}/edit" routerLinkActive="active">
+        <button mat-button (click)="openEdit(element.id)">
           <mat-icon style="color: blue;">edit</mat-icon>
         </button>
         <button mat-button (click)="onDelete(element.id)">

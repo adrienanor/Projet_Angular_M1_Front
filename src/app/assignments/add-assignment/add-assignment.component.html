@@ -1,3 +1,5 @@
+<h1 style="padding-left: 20px">Ajouter un devoir :</h1>
+
 <mat-stepper #stepper orientation="vertical">
   <form ngForm (submit)="onSubmit(); assignmentForm.reset()" #assignmentForm class="form">
     <mat-step [stepControl]="firstFormGroup" errorMessage="Le nom du devoir est requis.">
