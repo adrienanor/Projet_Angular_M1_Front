@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AssignmentsService } from 'src/app/shared/assignments.service';
 import { Assignment } from '../assignment.model';
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-edit-assignment',
@@ -12,42 +13,44 @@ export class EditAssignmentComponent implements OnInit {
   assignment!: Assignment | undefined;
   nomAssignment!: string;
   dateDeRendu!: Date;
+  auteur!: string;
+  matiere!: string;
+  rendu!: boolean;
+  note!: number;
+  remarque!: string;
 
   constructor(
     private assignmentsService: AssignmentsService,
-    private route: ActivatedRoute,
-    private router: Router
+    public dialogRef: MatDialogRef<EditAssignmentComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
   ngOnInit(): void {
     this.getAssignment();
   }
   getAssignment() {
-    // on récupère l'id dans le snapshot passé par le routeur
-    // le "+" force l'id de type string en "number"
-    const id = +this.route.snapshot.params['id'];
-
-    this.assignmentsService.getAssignment(id).subscribe((assignment) => {
+    this.assignmentsService.getAssignment(this.data.id).subscribe((assignment) => {
       if (!assignment) return;
       this.assignment = assignment;
-      // Pour pré-remplir le formulaire
       this.nomAssignment = assignment.nom;
       this.dateDeRendu = assignment.dateDeRendu;
+      this.matiere = assignment.matiere;
+      this.remarque = assignment.remarque;
     });
   }
   onSaveAssignment() {
     if (!this.assignment) return;
 
-    // on récupère les valeurs dans le formulaire
     this.assignment.nom = this.nomAssignment;
     this.assignment.dateDeRendu = this.dateDeRendu;
+    this.assignment.matiere = this.matiere;
+    this.assignment.remarque = this.remarque;
     this.assignmentsService
       .updateAssignment(this.assignment)
       .subscribe((message) => {
         console.log(message);
-
-        // navigation vers la home page
-        this.router.navigate(['/home']);
+        console.log(this.assignment);
+        this.dialogRef.close();
       });
   }
 }

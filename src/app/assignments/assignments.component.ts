@@ -3,8 +3,10 @@ import { AssignmentsService } from '../shared/assignments.service';
 import { Assignment } from './assignment.model';
 import {MatSort} from "@angular/material/sort";
 import {MatTableDataSource} from "@angular/material/table";
-import {formatDate} from "@angular/common";
 import {MatPaginator} from "@angular/material/paginator";
+import {Router} from "@angular/router";
+import {MatDialog} from "@angular/material/dialog";
+import {EditAssignmentComponent} from "./edit-assignment/edit-assignment.component";
 
 @Component({
   selector: 'app-assignments',
@@ -14,7 +16,7 @@ import {MatPaginator} from "@angular/material/paginator";
 export class AssignmentsComponent implements OnInit, AfterViewInit {
   assignments!: Assignment[];
   dataSource!: MatTableDataSource<Assignment>;
-  displayedColumns: string[] = ['id', 'nom', 'dateDeRendu', 'rendu'];
+  displayedColumns: string[] = ['id', 'nom', 'dateDeRendu', 'auteur', 'matiere', 'rendu', 'note', 'remarque', 'action'];
   dateDeRendu!: Date;
   page: number = 1;
   limit: number = 10;
@@ -29,27 +31,13 @@ export class AssignmentsComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort!: MatSort
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private assignmentsService: AssignmentsService) {
-    this.assignmentsService.getAssignmentsPagine(this.page, this.limit)
-      .subscribe(data => {
-        this.assignments = data.docs;
-        this.page = data.page;
-        this.limit = data.limit;
-        this.totalDocs = data.totalDocs;
-        this.totalPages = data.totalPages;
-        this.hasPrevPage = data.hasPrevPage;
-        this.prevPage = data.prevPage;
-        this.hasNextPage = data.hasNextPage;
-        this.nextPage = data.nextPage;
-        this.dataSource = new MatTableDataSource(data);
-        this.dataSource.paginator = this.paginator;
-      });
-    }
-    // this.assignmentsService.getAssignmentsPagine(this.page, this.limit).subscribe(data => {
-    //   this.dataSource = new MatTableDataSource(data);
-    // })
+  constructor(private assignmentsService: AssignmentsService,
+              public dialog: MatDialog) {
+    this.refreshTable();
+  }
 
   ngAfterViewInit(): void {
+    if(!this.dataSource) return;
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
     this.dataSource.sortingDataAccessor = (item: IIndexable, property) => {
@@ -65,6 +53,7 @@ export class AssignmentsComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+    if(!this.dataSource) return;
     this.dataSource.filterPredicate = (data, filter: string) => {
       //return data.nom.toLowerCase().includes(filter);
       console.log(filter);
@@ -92,26 +81,6 @@ export class AssignmentsComponent implements OnInit, AfterViewInit {
         this.dataSource.data = this.assignments;
       });
 
-  }
-
-  getDataByPage(page: number, limit: number) {
-    this.assignmentsService.getAssignmentsPagine(page, limit)
-      .subscribe(data => {
-        this.assignments = data.docs;
-        this.page = data.page;
-        this.limit = data.limit;
-        this.totalDocs = data.totalDocs;
-        this.totalPages = data.totalPages;
-        this.hasPrevPage = data.hasPrevPage;
-        this.prevPage = data.prevPage;
-        this.hasNextPage = data.hasNextPage;
-        this.nextPage = data.nextPage;
-        this.dataSource.data = this.assignments;
-      });
-  }
-
-  updatePage(event: any) {
-    this.getDataByPage(event.pageIndex + 1, event.pageSize);
   }
 
   applyFilter(event: Event) {
@@ -144,6 +113,50 @@ export class AssignmentsComponent implements OnInit, AfterViewInit {
       this.checked = el.value;
     }
     this.applyFilterCheckBox(this.checked);
+  }
+
+  onDelete(id: number) {
+    this.assignmentsService.getAssignment(id).subscribe((assignment) => {
+      if (!assignment) return;
+
+      this.assignmentsService
+        .deleteAssignement(assignment)
+        .subscribe((message) => {
+          console.log(message);
+          this.dataSource.data = this.dataSource.data.filter(
+            (a: Assignment) => a.id !== id
+          );
+        });
+    });
+  }
+
+  refreshTable() {
+    this.assignmentsService.getAssignmentsPagine(this.page, this.limit)
+      .subscribe(data => {
+        this.assignments = data.docs;
+        this.page = data.page;
+        this.limit = data.limit;
+        this.totalDocs = data.totalDocs;
+        this.totalPages = data.totalPages;
+        this.hasPrevPage = data.hasPrevPage;
+        this.prevPage = data.prevPage;
+        this.hasNextPage = data.hasNextPage;
+        this.nextPage = data.nextPage;
+        this.dataSource = new MatTableDataSource(data);
+        this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator;
+      });
+  }
+
+  openEdit(id: number) {
+    const dialogRef = this.dialog.open(EditAssignmentComponent, {
+      data: {id},
+    });
+
+    dialogRef.afterClosed().subscribe((result: any) => {
+      console.log(`Dialog result: ${result}`)
+      this.refreshTable();
+    });
   }
 }
 

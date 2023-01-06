@@ -1,19 +1,4 @@
-<!--<mat-sidenav-container>-->
-<!--  <mat-sidenav [(opened)]="opened" mode="side" [fixedInViewport]="true">-->
-<!--    <mat-nav-list>-->
-<!--      <mat-toolbar>MENU</mat-toolbar>-->
-<!--      <a mat-list-item routerLink="/home" routerLinkActive="active">Liste des devoirs</a>-->
-<!--      <a mat-list-item routerLink="/add" routerLinkActive="active">Ajouter un devoir</a>-->
-<!--    </mat-nav-list>-->
-<!--  </mat-sidenav>-->
-<!--  <mat-sidenav-content>-->
-<!--    <mat-toolbar color="primary"></mat-toolbar>-->
-<!--    <mat-slide-toggle color="primary" (click)="login()">Login</mat-slide-toggle>-->
-<!--    <router-outlet></router-outlet>-->
-<!--  </mat-sidenav-content>-->
-<!--</mat-sidenav-container>-->
-
-<mat-sidenav-container>
+<mat-sidenav-container id="container">
   <mat-sidenav [(opened)]="opened" mode="side" [fixedInViewport]="true">
     <mat-toolbar class="menu">
       <h1>MENU</h1>
@@ -25,7 +10,7 @@
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar color="primary"></mat-toolbar>
-<!--    <mat-slide-toggle color="primary" (click)="login()">Login</mat-slide-toggle>-->
+    <mat-slide-toggle color="primary" (click)="login()">Login</mat-slide-toggle>
     <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>

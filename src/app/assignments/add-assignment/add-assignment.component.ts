@@ -3,6 +3,7 @@ import { AssignmentsService } from 'src/app/shared/assignments.service';
 import { Assignment } from '../assignment.model';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {STEPPER_GLOBAL_OPTIONS} from "@angular/cdk/stepper";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-add-assignment',
@@ -18,10 +19,13 @@ import {STEPPER_GLOBAL_OPTIONS} from "@angular/cdk/stepper";
 export class AddAssignmentComponent implements OnInit {
   nomDevoir: string = '';
   dateDeRendu!: Date;
+  auteur: string = '';
+  matiere: string = '';
   firstFormGroup!: FormGroup;
   secondFormGroup!: FormGroup;
+  thirdFormGroup!: FormGroup;
 
-  constructor(private assignmentsService:AssignmentsService, private formBuilder: FormBuilder) {}
+  constructor(private assignmentsService:AssignmentsService, private formBuilder: FormBuilder, private router:Router) {}
 
   ngOnInit() {
     this.firstFormGroup = this.formBuilder.group({
@@ -29,6 +33,9 @@ export class AddAssignmentComponent implements OnInit {
     });
     this.secondFormGroup = this.formBuilder.group({
       secondCtrl: ['', Validators.required]
+    });
+    this.thirdFormGroup = this.formBuilder.group({
+      thirdCtrl: ['', Validators.required]
     });
   }
 
@@ -38,11 +45,14 @@ export class AddAssignmentComponent implements OnInit {
     newAssignment.id = Math.floor(Math.random() * 1000);
     newAssignment.nom = this.nomDevoir;
     newAssignment.dateDeRendu = this.dateDeRendu;
+    newAssignment.auteur = this.auteur;
+    newAssignment.matiere = this.matiere;
     newAssignment.rendu = false;
 
     this.assignmentsService.addAssignment(newAssignment)
       .subscribe(message => {
         console.log(message);
+        this.router.navigate(['/home']);
       });
   }
 }
