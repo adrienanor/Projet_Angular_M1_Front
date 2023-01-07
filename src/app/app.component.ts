@@ -10,16 +10,34 @@ import { AuthService } from './shared/auth.service';
 export class AppComponent {
   title = 'Application de gestion des assignments !!!';
   opened = true;
-
+  hide = true;
+  logged = false;
+  
   constructor(private authService:AuthService, private router:Router) {}
 
-  login() {
-    if(!this.authService.loggedIn) {
-      this.authService.logIn();
-    } else {
-      this.authService.logOut();
-      this.router.navigate(['/home']);
+  login(logs : any) {
+
+  let nomUtil = logs.target.nomUtil.value;
+  let mdp = logs.target.mdp.value
+
+      this.authService.logIn(nomUtil, mdp);
+      if(this.authService.loggedIn)
+        this.logged = true
+      else{
+        
+      }
+
+   
 
     }
-  }
+
+    logout(){
+
+      this.authService.logOut();
+      this.logged = false;
+      console.log(this.authService.loggedIn)
+      this.router.navigate(['/home']);
+    }
+  
+  
 }

@@ -48,7 +48,7 @@ export const MY_FORMAT: MatDateFormats = {
 const routes:Routes = [
   {path: '', component: AssignmentsComponent},
   {path: 'home', component: AssignmentsComponent},
-  {path: 'add', component: AddAssignmentComponent},
+  {path: 'add', component: AddAssignmentComponent, canActivate: [AuthGuard]},
   {path: 'assignment/:id', component: AssignmentsDetailsComponent},
   {
     path: 'assignment/:id/edit',

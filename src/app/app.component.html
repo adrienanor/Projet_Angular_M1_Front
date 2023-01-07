@@ -9,8 +9,28 @@
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
-    <mat-toolbar color="primary"></mat-toolbar>
-    <mat-slide-toggle color="primary" (click)="login()">Login</mat-slide-toggle>
+    <mat-toolbar color="primary">
+      <form (ngSubmit)="login($event)" *ngIf="!logged">
+
+      <mat-form-field appearance="fill">
+        <mat-label>Nom utilisateur</mat-label>
+        <input matInput name="nomUtil">
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Mot de passe</mat-label>
+        <input matInput [type]="hide ? 'password' : 'text'" name="mdp">
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+      </mat-form-field>
+
+      <button mat-raised-button color="accent" type="submit">Login</button>
+    </form>
+
+    <button mat-raised-button color="accent" *ngIf="logged" (click)="logout()">Déconnexion</button>
+    </mat-toolbar>
+
     <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>

@@ -5,15 +5,34 @@ import { Injectable } from '@angular/core';
 })
 export class AuthService {
   loggedIn=false;
+  admin = false;
+
+  map = new Map([
+    [true, ["G", "g"]],
+    [false, ["T", "t"]]
+  ]);
+
+
 
   constructor() { }
 
-  logIn() {
-    this.loggedIn = true;
+  logIn(nomUtil:string, mdp: string) {
+    this.map.forEach((value: string[], key: boolean) =>
+    {
+      if(value[0] == nomUtil && value[1] == mdp)
+      {
+        this.loggedIn = true;
+        this.admin = key;
+        console.log("logged")
+      }   
+    }
+    )
   }
 
   logOut() {
     this.loggedIn = false;
+    this.admin = false;
+
   }
 
   // renvoie une promesse qui est résolue si l'utilisateur est loggué
@@ -22,5 +41,5 @@ export class AuthService {
       resolve(this.loggedIn);
     });
     return isUserAdmin;
-  }
+  }  
 }

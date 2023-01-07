@@ -7,6 +7,7 @@ import {MatPaginator} from "@angular/material/paginator";
 import {Router} from "@angular/router";
 import {MatDialog} from "@angular/material/dialog";
 import {EditAssignmentComponent} from "./edit-assignment/edit-assignment.component";
+import { AuthService } from 'src/app/shared/auth.service';
 
 @Component({
   selector: 'app-assignments',
@@ -32,7 +33,8 @@ export class AssignmentsComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(private assignmentsService: AssignmentsService,
-              public dialog: MatDialog) {
+              public dialog: MatDialog,
+              private authService:AuthService) {
     this.refreshTable();
   }
 
@@ -158,8 +160,17 @@ export class AssignmentsComponent implements OnInit, AfterViewInit {
       this.refreshTable();
     });
   }
+
+  isAdmin():boolean{
+    return this.authService.admin;
+  }
+  isLogged():boolean{
+    return this.authService.loggedIn;
+  }
 }
 
 export interface IIndexable {
   [key: string]: any;
 }
+
+
