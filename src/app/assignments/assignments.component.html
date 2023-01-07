@@ -75,11 +75,11 @@
         <button mat-button routerLink="/assignment/{{element.id}}" routerLinkActive="active">
           <mat-icon style="color: cornflowerblue;">assignment</mat-icon>
         </button>
-        <button mat-button (click)="openEdit(element.id)" [disabled]="!isLogged()">
+        <button class="editButton" mat-button (click)="openEdit(element.id)" [disabled]="!isLogged()">
           <mat-icon>edit</mat-icon>
         </button>
-        <button mat-button (click)="onDelete(element.id)" [disabled]="!isAdmin()">
-          <mat-icon >delete</mat-icon>
+        <button class="deleteButton" mat-button (click)="onDelete(element.id)" [disabled]="!isAdmin()">
+          <mat-icon>delete</mat-icon>
         </button>
       </td>
     </ng-container>

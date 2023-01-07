@@ -18,3 +18,19 @@
 .mat-header-cell{
   text-align: center;
 }
+
+.editButton{
+  color: blue;
+}
+
+.editButton:disabled{
+  color: rgb(197, 196, 196);
+}
+
+.deleteButton{
+  color: red;
+}
+
+.deleteButton:disabled{
+  color: rgb(197, 196, 196);
+}
