@@ -12,32 +12,35 @@ export class AppComponent {
   opened = true;
   hide = true;
   logged = false;
-  
-  constructor(private authService:AuthService, private router:Router) {}
 
-  login(logs : any) {
+  constructor(private authService: AuthService, private router: Router) { }
 
-  let nomUtil = logs.target.nomUtil.value;
-  let mdp = logs.target.mdp.value
+  async login(logs: any) {
 
-      this.authService.logIn(nomUtil, mdp);
-      if(this.authService.loggedIn)
-        this.logged = true
-      else{
-        
-      }
+    let nomUtil = logs.target.nomUtil.value;
+    let mdp = logs.target.mdp.value
+    console.log("je suis dans le login button")
+    await this.authService.logIn(nomUtil, mdp);
+    
+    setTimeout(() => {
+      this.isLogged();
+    }, 150);
 
-   
 
-    }
+  }
 
-    logout(){
+  logout() {
+    this.authService.logOut();
+    this.logged = false;
+    console.log(this.authService.loggedIn)
+    this.router.navigate(['/home']);
+  }
 
-      this.authService.logOut();
-      this.logged = false;
-      console.log(this.authService.loggedIn)
-      this.router.navigate(['/home']);
-    }
-  
-  
+  isLogged()
+  {
+    console.log("2 " +this.authService.loggedIn)
+    if (this.authService.loggedIn)
+      this.logged = true;
+  }
+
 }
