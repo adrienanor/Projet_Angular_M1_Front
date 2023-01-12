@@ -10,8 +10,6 @@ export class AuthService {
   loggedIn = false;
   admin: any;
 
-
-
   constructor( private utilisateurService: UtilisateursService) { }
 
    async logIn(nomUtil: string, mdp: string) {
@@ -28,15 +26,11 @@ export class AuthService {
       return true;
     });
 
-
-
   }
-
 
   logOut() {
     this.loggedIn = false;
     this.admin = false;
-
   }
 
   // renvoie une promesse qui est résolue si l'utilisateur est loggué
@@ -45,5 +39,13 @@ export class AuthService {
       resolve(this.loggedIn);
     });
     return isUserAdmin;
+  }
+
+  setLoggedIn(value: boolean) {
+    this.loggedIn = value;
+  }
+
+  get isLoggedIn() {
+    return this.loggedIn;
   }
 }

@@ -5,30 +5,14 @@
     </mat-toolbar>
     <mat-nav-list>
       <a mat-list-item routerLink="/home" routerLinkActive="active">Liste des devoirs</a>
-      <a mat-list-item routerLink="/add" routerLinkActive="active">Ajouter un devoir</a>
+      <a *ngIf="isLoggedIn" mat-list-item routerLink="/add" routerLinkActive="active">Ajouter un devoir</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar color="primary">
-      <form (ngSubmit)="login($event)" *ngIf="!logged">
-
-      <mat-form-field appearance="fill">
-        <mat-label>Nom utilisateur</mat-label>
-        <input matInput name="nomUtil">
-      </mat-form-field>
-
-      <mat-form-field appearance="fill">
-        <mat-label>Mot de passe</mat-label>
-        <input matInput [type]="hide ? 'password' : 'text'" name="mdp">
-        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-        </button>
-      </mat-form-field>
-
-      <button mat-raised-button color="primary" type="submit">Login</button>
-    </form>
-
-    <button mat-raised-button color="primary" *ngIf="logged" (click)="logout()">Déconnexion</button>
+      <span class="toolbar-spacer"></span>
+      <button mat-raised-button color="primary" *ngIf="!isLoggedIn" (click)="connexion()">Connexion</button>
+      <button mat-raised-button color="primary" *ngIf="isLoggedIn" (click)="logout()">Déconnexion</button>
     </mat-toolbar>
 
     <router-outlet></router-outlet>

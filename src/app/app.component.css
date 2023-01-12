@@ -1,7 +1,6 @@
-.example-spacer {
+.toolbar-spacer {
   flex: 1 1 auto;
 }
-
 
 .mat-sidenav {
   width: 200px;
@@ -19,4 +18,8 @@
 
 .mat-list-item{
   color: #fff;
+}
+
+.mat-raised-button{
+  font-size: 18px;
 }

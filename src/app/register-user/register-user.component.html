@@ -1,0 +1,47 @@
+<div class="login-page">
+  <mat-card class="mat-elevation-z12">
+    <mat-card-title style="text-align:center;">Connexion/Inscription</mat-card-title>
+    <mat-tab-group mat-stretch-tabs class="example-stretched-tabs">
+      <mat-tab label="Connexion">
+        <mat-card-content>
+          <form (ngSubmit)="login($event)" *ngIf="!isLoggedIn">
+            <mat-form-field>
+              <input
+                matInput
+                placeholder="Utilisateur"
+                [formControl]="userFormControl"
+                name="nomUtil">
+              <mat-error *ngIf="userFormControl.hasError('required')">
+                Le nom d'utilisateur est <strong>requis</strong>
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+              <input
+                matInput
+                [type]="hide ? 'password' : 'text'"
+                placeholder="Mot de passe"
+                [formControl]="passwordFormControl"
+                type="password"
+                name="mdp">
+              <button mat-icon-button matSuffix (click)="hide = !hide; $event.preventDefault()" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                <mat-icon class="visible">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </button>
+              <mat-error *ngIf="passwordFormControl.hasError('required')">
+                Le mot de passe est <strong>requis</strong>
+              </mat-error>
+            </mat-form-field>
+
+            <button
+              mat-raised-button
+              color="primary"
+              type="submit"
+              class="login-button">
+              Se connecter
+            </button>
+          </form>
+        </mat-card-content>
+      </mat-tab>
+    </mat-tab-group>
+  </mat-card>
+</div>

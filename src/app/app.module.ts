@@ -32,6 +32,8 @@ import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatRadioModule} from "@angular/material/radio";
 import {MatStepperModule} from "@angular/material/stepper"
 import {MatDialogModule} from "@angular/material/dialog";
+import { RegisterUserComponent } from './register-user/register-user.component';
+import {MatTabsModule} from "@angular/material/tabs";
 
 export const MY_FORMAT: MatDateFormats = {
   parse: {
@@ -50,6 +52,7 @@ const routes:Routes = [
   {path: 'home', component: AssignmentsComponent},
   {path: 'add', component: AddAssignmentComponent, canActivate: [AuthGuard]},
   {path: 'assignment/:id', component: AssignmentsDetailsComponent},
+  {path: 'register', component: RegisterUserComponent},
   {
     path: 'assignment/:id/edit',
     component: EditAssignmentComponent,
@@ -63,19 +66,20 @@ const routes:Routes = [
     RenduDirective,
     AddAssignmentComponent,
     EditAssignmentComponent,
+    RegisterUserComponent,
   ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    MatButtonModule, MatIconModule, MatDividerModule,
-    MatInputModule, MatFormFieldModule,
-    MatDatepickerModule, MatNativeDateModule, MatListModule,
-    MatCardModule, MatCheckboxModule, MatSlideToggleModule,
-    FormsModule, HttpClientModule,
-    RouterModule.forRoot(routes), MatToolbarModule, MatSidenavModule, MatTableModule,
-    MatSortModule, MatPaginatorModule, MatRadioModule, MatStepperModule, ReactiveFormsModule,
-    MatDialogModule,
-  ],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        MatButtonModule, MatIconModule, MatDividerModule,
+        MatInputModule, MatFormFieldModule,
+        MatDatepickerModule, MatNativeDateModule, MatListModule,
+        MatCardModule, MatCheckboxModule, MatSlideToggleModule,
+        FormsModule, HttpClientModule,
+        RouterModule.forRoot(routes), MatToolbarModule, MatSidenavModule, MatTableModule,
+        MatSortModule, MatPaginatorModule, MatRadioModule, MatStepperModule, ReactiveFormsModule,
+        MatDialogModule, MatTabsModule,
+    ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'fr-FR' },
     { provide: MAT_DATE_FORMATS, useValue: MY_FORMAT }
