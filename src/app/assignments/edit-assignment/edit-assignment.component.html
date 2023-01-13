@@ -11,7 +11,11 @@
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
     <mat-form-field>
-      <input matInput placeholder="Matière" [(ngModel)]="matiere" name="matiere">
+      <mat-select [(ngModel)]="matiere" placeholder="Matière" required name="matiere">
+        <mat-option *ngFor="let matiere of matieres | async" [value]="matiere">
+          {{matiere.nom}}
+        </mat-option>
+      </mat-select>
     </mat-form-field>
     <mat-form-field>
       <textarea matInput placeholder="Remarque" [(ngModel)]="remarque" name="remarque"></textarea>

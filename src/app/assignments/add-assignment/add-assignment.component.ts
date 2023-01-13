@@ -4,6 +4,9 @@ import { Assignment } from '../assignment.model';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {STEPPER_GLOBAL_OPTIONS} from "@angular/cdk/stepper";
 import {Router} from "@angular/router";
+import {Matiere} from "../matiere.model";
+import {MatieresService} from "../../shared/matieres.service";
+import {map, Observable} from "rxjs";
 
 @Component({
   selector: 'app-add-assignment',
@@ -20,12 +23,14 @@ export class AddAssignmentComponent implements OnInit {
   nomDevoir: string = '';
   dateDeRendu!: Date;
   auteur: string = '';
-  matiere: string = '';
+  matiere!: Matiere;
   firstFormGroup!: FormGroup;
   secondFormGroup!: FormGroup;
   thirdFormGroup!: FormGroup;
+  matieres!: Observable<Matiere[]>;
 
-  constructor(private assignmentsService:AssignmentsService, private formBuilder: FormBuilder, private router:Router) {}
+  constructor(private assignmentsService:AssignmentsService, private formBuilder: FormBuilder,
+              private router:Router, private matieresService:MatieresService) {}
 
   ngOnInit() {
     this.firstFormGroup = this.formBuilder.group({
@@ -37,6 +42,7 @@ export class AddAssignmentComponent implements OnInit {
     this.thirdFormGroup = this.formBuilder.group({
       thirdCtrl: ['', Validators.required]
     });
+    this.matieres = this.matieresService.getMatieres().pipe(map(matieres => Object.values(matieres)));
   }
 
   onSubmit() {

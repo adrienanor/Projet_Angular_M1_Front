@@ -9,7 +9,13 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import {MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatDateFormats, MatNativeDateModule} from '@angular/material/core';
+import {
+  MAT_DATE_FORMATS,
+  MAT_DATE_LOCALE,
+  MatDateFormats,
+  MatNativeDateModule,
+  MatOptionModule
+} from '@angular/material/core';
 import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -34,6 +40,7 @@ import {MatStepperModule} from "@angular/material/stepper"
 import {MatDialogModule} from "@angular/material/dialog";
 import { RegisterUserComponent } from './register-user/register-user.component';
 import {MatTabsModule} from "@angular/material/tabs";
+import {MatSelectModule} from "@angular/material/select";
 
 export const MY_FORMAT: MatDateFormats = {
   parse: {
@@ -68,18 +75,18 @@ const routes:Routes = [
     EditAssignmentComponent,
     RegisterUserComponent,
   ],
-    imports: [
-        BrowserModule,
-        BrowserAnimationsModule,
-        MatButtonModule, MatIconModule, MatDividerModule,
-        MatInputModule, MatFormFieldModule,
-        MatDatepickerModule, MatNativeDateModule, MatListModule,
-        MatCardModule, MatCheckboxModule, MatSlideToggleModule,
-        FormsModule, HttpClientModule,
-        RouterModule.forRoot(routes), MatToolbarModule, MatSidenavModule, MatTableModule,
-        MatSortModule, MatPaginatorModule, MatRadioModule, MatStepperModule, ReactiveFormsModule,
-        MatDialogModule, MatTabsModule,
-    ],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    MatButtonModule, MatIconModule, MatDividerModule,
+    MatInputModule, MatFormFieldModule,
+    MatDatepickerModule, MatNativeDateModule, MatListModule,
+    MatCardModule, MatCheckboxModule, MatSlideToggleModule,
+    FormsModule, HttpClientModule,
+    RouterModule.forRoot(routes), MatToolbarModule, MatSidenavModule, MatTableModule,
+    MatSortModule, MatPaginatorModule, MatRadioModule, MatStepperModule, ReactiveFormsModule,
+    MatDialogModule, MatTabsModule, MatOptionModule, MatSelectModule,
+  ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'fr-FR' },
     { provide: MAT_DATE_FORMATS, useValue: MY_FORMAT }

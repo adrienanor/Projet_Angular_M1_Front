@@ -19,7 +19,11 @@
         <ng-template matStepLabel>Remplissez la matière du devoir </ng-template>
         <mat-form-field appearance="outline">
           <mat-label>Matière</mat-label>
-          <input matInput [(ngModel)]="matiere" formControlName="secondCtrl" required>
+          <mat-select [(ngModel)]="matiere" formControlName="secondCtrl" required>
+            <mat-option *ngFor="let matiere of matieres| async" [value]="matiere">
+              {{matiere.nom}}
+            </mat-option>
+          </mat-select>
         </mat-form-field>
         <mat-card-actions>
           <button mat-button matStepperPrevious>Précédent</button>
@@ -47,7 +51,7 @@
       <mat-card>
         <ng-template matStepLabel>Ajout du devoir</ng-template>
         <p>Nom : {{nomDevoir}}</p>
-        <p>Matière : {{matiere}}</p>
+        <p>Matière : {{matiere?.nom}}</p>
         <p>Date de rendu : {{dateDeRendu | date}}</p>
         <mat-card-actions>
           <button mat-button matStepperPrevious>Précédent</button>

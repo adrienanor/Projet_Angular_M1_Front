@@ -8,6 +8,8 @@ import {Router} from "@angular/router";
 import {MatDialog} from "@angular/material/dialog";
 import {EditAssignmentComponent} from "./edit-assignment/edit-assignment.component";
 import { AuthService } from 'src/app/shared/auth.service';
+import {Matiere} from "./matiere.model";
+import {MatieresService} from "../shared/matieres.service";
 
 @Component({
   selector: 'app-assignments',
@@ -17,7 +19,7 @@ import { AuthService } from 'src/app/shared/auth.service';
 export class AssignmentsComponent implements OnInit, AfterViewInit {
   assignments!: Assignment[];
   dataSource!: MatTableDataSource<Assignment>;
-  displayedColumns: string[] = ['id', 'nom', 'dateDeRendu', 'auteur', 'matiere', 'rendu', 'note', 'remarque', 'action'];
+  displayedColumns: any[] = ['id', 'nom', 'dateDeRendu', 'auteur', 'matiere', 'rendu', 'note', 'remarque', 'action'];
   dateDeRendu!: Date;
   page: number = 1;
   limit: number = 10;
@@ -34,6 +36,7 @@ export class AssignmentsComponent implements OnInit, AfterViewInit {
 
   constructor(private assignmentsService: AssignmentsService,
               public dialog: MatDialog,
+              private matiereService: MatieresService,
               private authService:AuthService) {
     this.refreshTable();
   }
@@ -68,20 +71,20 @@ export class AssignmentsComponent implements OnInit, AfterViewInit {
       }
     };
 
-    this.assignmentsService.getAssignmentsPagine(this.page, this.limit)
-      .subscribe(data => {
-        this.assignments = data.docs;
-        this.page = data.page;
-        this.limit = data.limit;
-        this.totalDocs = data.totalDocs;
-        this.totalPages = data.totalPages;
-        this.hasPrevPage = data.hasPrevPage;
-        this.prevPage = data.prevPage;
-        this.hasNextPage = data.hasNextPage;
-        this.nextPage = data.nextPage;
-        console.log("données reçues");
-        this.dataSource.data = this.assignments;
-      });
+    // this.assignmentsService.getAssignmentsPagine(this.page, this.limit)
+    //   .subscribe(data => {
+    //     this.assignments = data.docs;
+    //     this.page = data.page;
+    //     this.limit = data.limit;
+    //     this.totalDocs = data.totalDocs;
+    //     this.totalPages = data.totalPages;
+    //     this.hasPrevPage = data.hasPrevPage;
+    //     this.prevPage = data.prevPage;
+    //     this.hasNextPage = data.hasNextPage;
+    //     this.nextPage = data.nextPage;
+    //     console.log("données reçues");
+    //     this.dataSource.data = this.assignments;
+    //   });
 
   }
 

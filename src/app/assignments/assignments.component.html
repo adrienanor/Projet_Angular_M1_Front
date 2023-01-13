@@ -47,7 +47,11 @@
 
     <ng-container matColumnDef="matiere">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Matière </th>
-      <td mat-cell *matCellDef="let element"> {{element.matiere}} </td>
+      <td mat-cell *matCellDef="let element">
+        <ng-container *ngIf="element.matiere !== null">
+          {{element.matiere?.nom}}
+        </ng-container>
+      </td>
     </ng-container>
 
     <ng-container matColumnDef="rendu">
