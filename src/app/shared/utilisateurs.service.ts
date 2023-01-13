@@ -15,6 +15,7 @@ export class UtilisateursService {
   };
 
   utilisateurs:Utilisateur[] = [];
+  utilisateur!: string;
 
   constructor(private logginService:LoggingService,
               private http:HttpClient) { }
@@ -29,6 +30,7 @@ export class UtilisateursService {
   // renvoie comme Observable l'utilisateur dont le nomUtil et le mdp sont passés
   // en paramètre, ou undefined s'il n'existe pas
   getUtilisateur(nomUtil:string, mdp:string):Observable<Utilisateur> {
+    this.utilisateur = nomUtil;
     console.log("get by nomUtil = "+nomUtil)
     return this.http.get<Utilisateur>(this.url + "/" + nomUtil + "/" +mdp)
       .pipe(map(a => {

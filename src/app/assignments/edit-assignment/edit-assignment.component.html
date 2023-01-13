@@ -18,8 +18,17 @@
       </mat-select>
     </mat-form-field>
     <mat-form-field>
+      <input matInput [(ngModel)]="note" placeholder="Note" name="nom" >
+    </mat-form-field>
+    <mat-form-field>
       <textarea matInput placeholder="Remarque" [(ngModel)]="remarque" name="remarque"></textarea>
     </mat-form-field>
+    <mat-checkbox [disabled]="!assignment.note"
+                  [checked]="assignment.rendu"
+                  (change)="assignment.rendu = true"
+    >
+      Devoir rendu
+    </mat-checkbox>
     <button mat-raised-button color="primary" [disabled]="((!nomAssignment)||(!dateDeRendu))">
       Sauvegarder
     </button>

@@ -7,6 +7,7 @@ import {Router} from "@angular/router";
 import {Matiere} from "../../matieres/matiere.model";
 import {MatieresService} from "../../shared/matieres.service";
 import {map, Observable} from "rxjs";
+import {UtilisateursService} from "../../shared/utilisateurs.service";
 
 @Component({
   selector: 'app-add-assignment',
@@ -22,7 +23,6 @@ import {map, Observable} from "rxjs";
 export class AddAssignmentComponent implements OnInit {
   nomDevoir: string = '';
   dateDeRendu!: Date;
-  auteur: string = '';
   matiere!: Matiere;
   firstFormGroup!: FormGroup;
   secondFormGroup!: FormGroup;
@@ -30,6 +30,7 @@ export class AddAssignmentComponent implements OnInit {
   matieres!: Observable<Matiere[]>;
 
   constructor(private assignmentsService:AssignmentsService, private formBuilder: FormBuilder,
+              private utilisteurService: UtilisateursService,
               private router:Router, private matieresService:MatieresService) {}
 
   ngOnInit() {
@@ -51,7 +52,7 @@ export class AddAssignmentComponent implements OnInit {
     newAssignment.id = Math.floor(Math.random() * 1000);
     newAssignment.nom = this.nomDevoir;
     newAssignment.dateDeRendu = this.dateDeRendu;
-    newAssignment.auteur = this.auteur;
+    newAssignment.auteur = this.utilisteurService.utilisateur;
     newAssignment.matiere = this.matiere;
     newAssignment.rendu = false;
 

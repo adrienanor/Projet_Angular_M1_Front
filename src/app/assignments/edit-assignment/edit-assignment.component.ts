@@ -44,6 +44,7 @@ export class EditAssignmentComponent implements OnInit {
       this.dateDeRendu = assignment.dateDeRendu;
       this.matiere = assignment.matiere;
       this.remarque = assignment.remarque;
+      this.note = assignment.note;
     });
   }
 
@@ -54,6 +55,7 @@ export class EditAssignmentComponent implements OnInit {
     this.assignment.dateDeRendu = this.dateDeRendu;
     this.assignment.matiere = this.matiere;
     this.assignment.remarque = this.remarque;
+    this.assignment.note = this.note;
     this.assignmentsService
       .updateAssignment(this.assignment)
       .subscribe((message) => {

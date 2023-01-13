@@ -6,13 +6,14 @@
     <mat-nav-list>
       <a mat-list-item routerLink="/home" routerLinkActive="active">Liste des devoirs</a>
       <a *ngIf="isLoggedIn" mat-list-item routerLink="/add" routerLinkActive="active">Ajouter un devoir</a>
-      <a mat-list-item routerLink="/add-matiere" routerLinkActive="active">Ajouter une matière</a>
+      <a *ngIf="isLoggedIn" mat-list-item routerLink="/add-matiere" routerLinkActive="active">Ajouter une matière</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar color="primary">
       <span class="toolbar-spacer"></span>
-      <button mat-raised-button color="primary" *ngIf="!isLoggedIn" (click)="connexion()">Connexion</button>
+      <button mat-raised-button color="primary" *ngIf="!isLoggedIn" (click)="connexion()">Se connecter</button>
+      <button mat-raised-button color="primary" *ngIf="!isLoggedIn" (click)="inscription()">S'inscrire</button>
       <button mat-raised-button color="primary" *ngIf="isLoggedIn" (click)="logout()">Déconnexion</button>
     </mat-toolbar>
 

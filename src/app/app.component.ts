@@ -27,4 +27,8 @@ export class AppComponent {
     this.router.navigate(['/register']);
   }
 
+  inscription(){
+    this.router.navigate(['/inscription']);
+  }
+
 }
