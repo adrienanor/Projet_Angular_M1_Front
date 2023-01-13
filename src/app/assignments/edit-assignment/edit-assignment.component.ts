@@ -3,7 +3,7 @@ import { AssignmentsService } from 'src/app/shared/assignments.service';
 import { Assignment } from '../assignment.model';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {map, Observable} from "rxjs";
-import {Matiere} from "../matiere.model";
+import {Matiere} from "../../matieres/matiere.model";
 import {MatieresService} from "../../shared/matieres.service";
 
 @Component({

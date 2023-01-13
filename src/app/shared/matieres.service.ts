@@ -1,13 +1,19 @@
 import {catchError, map, Observable, of, tap} from "rxjs";
 import {LoggingService} from "./logging.service";
-import {HttpClient} from "@angular/common/http";
-import {Matiere} from "../assignments/matiere.model";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {Matiere} from "../matieres/matiere.model";
 import {Injectable} from "@angular/core";
+import {Assignment} from "../assignments/assignment.model";
 
 @Injectable({
   providedIn: 'root'
 })
 export class MatieresService{
+  private HttpOptions ={
+    headers: new HttpHeaders({
+      'Content-Type':'application/json'
+    })
+  };
 
   constructor(private logginService:LoggingService,
               private http:HttpClient) {}
@@ -39,6 +45,10 @@ export class MatieresService{
 
       return of(result as T);
     }
+  }
+
+  addMatiere(matiere:Matiere):Observable<any> {
+    return this.http.post<Matiere>(this.url, matiere, this.HttpOptions);
   }
 
 }

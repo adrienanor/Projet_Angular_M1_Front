@@ -4,7 +4,7 @@ import { Assignment } from '../assignment.model';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {STEPPER_GLOBAL_OPTIONS} from "@angular/cdk/stepper";
 import {Router} from "@angular/router";
-import {Matiere} from "../matiere.model";
+import {Matiere} from "../../matieres/matiere.model";
 import {MatieresService} from "../../shared/matieres.service";
 import {map, Observable} from "rxjs";
 

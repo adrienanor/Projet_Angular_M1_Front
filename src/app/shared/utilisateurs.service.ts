@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Utilisateur } from '../assignments/utilisateur.model';
+import { Utilisateur } from '../utilisateurs/utilisateur.model';
 import {catchError, map, Observable, of, tap} from 'rxjs';
 import { LoggingService } from './logging.service';
 import {HttpClient, HttpHeaders} from "@angular/common/http";

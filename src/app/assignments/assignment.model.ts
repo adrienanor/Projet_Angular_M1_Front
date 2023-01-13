@@ -1,4 +1,4 @@
-import {Matiere} from "./matiere.model";
+import {Matiere} from "../matieres/matiere.model";
 
 export class Assignment
 {

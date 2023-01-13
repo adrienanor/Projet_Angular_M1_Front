@@ -1,0 +1,59 @@
+<h1 style="padding-left: 20px">Ajouter une matière :</h1>
+
+<mat-stepper #stepper orientation="vertical">
+  <form ngForm (submit)="onSubmit(); matiereForm.reset()" #matiereForm class="form">
+    <mat-step [stepControl]="firstFormGroup" errorMessage="Le nom de la matière est requise.">
+      <mat-card [formGroup]="firstFormGroup">
+        <ng-template matStepLabel>Remplissez le nom de la matière </ng-template>
+        <mat-form-field appearance="outline">
+          <mat-label>Nom de la matière</mat-label>
+          <input matInput [(ngModel)]="nomMatiere" formControlName="firstCtrl" required>
+        </mat-form-field>
+        <mat-card-actions>
+          <button mat-button matStepperNext>Suivant</button>
+        </mat-card-actions>
+      </mat-card>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup" errorMessage="Le nom du professeur est requis.">
+      <mat-card [formGroup]="secondFormGroup">
+        <ng-template matStepLabel>Remplissez le nom du professeur de la matière </ng-template>
+        <mat-form-field appearance="outline">
+          <mat-label>Professeur</mat-label>
+          <input matInput [(ngModel)]="nomProfesseur" formControlName="secondCtrl" required>
+        </mat-form-field>
+        <mat-card-actions>
+          <button mat-button matStepperPrevious>Précédent</button>
+          <button mat-button matStepperNext>Suivant</button>
+        </mat-card-actions>
+      </mat-card>
+    </mat-step>
+<!--    <mat-step [stepControl]="thirdFormGroup" errorMessage="La date de rendu est requise.">-->
+<!--      <mat-card [formGroup]="thirdFormGroup">-->
+<!--        <ng-template matStepLabel>Remplissez la date de rendu</ng-template>-->
+<!--        <mat-form-field appearance="outline">-->
+<!--          <mat-label>Date de rendu</mat-label>-->
+<!--          <input matInput formControlName="thirdCtrl" [matDatepicker]="picker" [(ngModel)]="dateDeRendu" required>-->
+<!--          <mat-hint>DD/MM/YYYY</mat-hint>-->
+<!--          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>-->
+<!--          <mat-datepicker #picker></mat-datepicker>-->
+<!--        </mat-form-field>-->
+<!--        <mat-card-actions>-->
+<!--          <button mat-button matStepperPrevious>Précédent</button>-->
+<!--          <button mat-button matStepperNext>Suivant</button>-->
+<!--        </mat-card-actions>-->
+<!--      </mat-card>-->
+<!--    </mat-step>-->
+    <mat-step>
+      <mat-card>
+        <ng-template matStepLabel>Ajout de la matière</ng-template>
+        <p>Nom : {{nomMatiere}}</p>
+        <p>Professeur : {{nomProfesseur}}</p>
+        <mat-card-actions>
+          <button mat-button matStepperPrevious>Précédent</button>
+          <button mat-stroked-button (click)="onSubmit()" color="primary">Ajouter une matière</button>
+        </mat-card-actions>
+      </mat-card>
+
+    </mat-step>
+  </form>
+</mat-stepper>

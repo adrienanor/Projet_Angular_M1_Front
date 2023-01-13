@@ -8,8 +8,9 @@ import {Router} from "@angular/router";
 import {MatDialog} from "@angular/material/dialog";
 import {EditAssignmentComponent} from "./edit-assignment/edit-assignment.component";
 import { AuthService } from 'src/app/shared/auth.service';
-import {Matiere} from "./matiere.model";
+import {Matiere} from "../matieres/matiere.model";
 import {MatieresService} from "../shared/matieres.service";
+import {AssignmentsDetailsComponent} from "./assignments-details/assignments-details.component";
 
 @Component({
   selector: 'app-assignments',
@@ -71,20 +72,20 @@ export class AssignmentsComponent implements OnInit, AfterViewInit {
       }
     };
 
-    // this.assignmentsService.getAssignmentsPagine(this.page, this.limit)
-    //   .subscribe(data => {
-    //     this.assignments = data.docs;
-    //     this.page = data.page;
-    //     this.limit = data.limit;
-    //     this.totalDocs = data.totalDocs;
-    //     this.totalPages = data.totalPages;
-    //     this.hasPrevPage = data.hasPrevPage;
-    //     this.prevPage = data.prevPage;
-    //     this.hasNextPage = data.hasNextPage;
-    //     this.nextPage = data.nextPage;
-    //     console.log("données reçues");
-    //     this.dataSource.data = this.assignments;
-    //   });
+    this.assignmentsService.getAssignmentsPagine(this.page, this.limit)
+      .subscribe(data => {
+        this.assignments = data.docs;
+        this.page = data.page;
+        this.limit = data.limit;
+        this.totalDocs = data.totalDocs;
+        this.totalPages = data.totalPages;
+        this.hasPrevPage = data.hasPrevPage;
+        this.prevPage = data.prevPage;
+        this.hasNextPage = data.hasNextPage;
+        this.nextPage = data.nextPage;
+        console.log("données reçues");
+        this.dataSource.data = this.assignments;
+      });
 
   }
 
@@ -159,6 +160,17 @@ export class AssignmentsComponent implements OnInit, AfterViewInit {
     });
 
     dialogRef.afterClosed().subscribe((result: any) => {
+      console.log(`Dialog result: ${result}`)
+      this.refreshTable();
+    });
+  }
+
+  openDetail(id: number) {
+    const dialogRef1 = this.dialog.open(AssignmentsDetailsComponent, {
+      data: {id},
+    });
+
+    dialogRef1.afterClosed().subscribe((result: any) => {
       console.log(`Dialog result: ${result}`)
       this.refreshTable();
     });

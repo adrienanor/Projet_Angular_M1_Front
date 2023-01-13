@@ -51,7 +51,7 @@
       <mat-card>
         <ng-template matStepLabel>Ajout du devoir</ng-template>
         <p>Nom : {{nomDevoir}}</p>
-        <p>Matière : {{matiere?.nom}}</p>
+        <p *ngIf="matiere" >Matière : {{matiere.nom}}</p>
         <p>Date de rendu : {{dateDeRendu | date}}</p>
         <mat-card-actions>
           <button mat-button matStepperPrevious>Précédent</button>

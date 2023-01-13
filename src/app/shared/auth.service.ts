@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs';
 import { UtilisateursService } from './utilisateurs.service';
-import { Utilisateur } from '../assignments/utilisateur.model';
+import { Utilisateur } from '../utilisateurs/utilisateur.model';
 
 @Injectable({
   providedIn: 'root'

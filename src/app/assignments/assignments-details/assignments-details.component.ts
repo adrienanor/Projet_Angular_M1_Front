@@ -1,8 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {Component, Inject, Input, OnInit} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AssignmentsService } from 'src/app/shared/assignments.service';
 import { AuthService } from 'src/app/shared/auth.service';
 import { Assignment } from '../assignment.model';
+import {MAT_DIALOG_DATA} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-assignments-details',
@@ -16,7 +17,8 @@ export class AssignmentsDetailsComponent implements OnInit {
     private assignmentService: AssignmentsService,
     private authService:AuthService,
     private route: ActivatedRoute,
-    private router:Router
+    private router:Router,
+    @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
   ngOnInit(): void {
@@ -24,8 +26,7 @@ export class AssignmentsDetailsComponent implements OnInit {
   }
 
   getAssignment() {
-    const id = +this.route.snapshot.params['id'];
-    this.assignmentService.getAssignment(id).subscribe((assignment) => {
+    this.assignmentService.getAssignment(this.data.id).subscribe((assignment) => {
       this.assignmentTransmis = assignment;
     });
   }

@@ -76,7 +76,7 @@
     <ng-container matColumnDef="action">
       <th mat-header-cell *matHeaderCellDef> Actions </th>
       <td mat-cell *matCellDef="let element" style="text-align: center ">
-        <button mat-button routerLink="/assignment/{{element.id}}" routerLinkActive="active">
+        <button mat-button (click)="openDetail(element.id)">
           <mat-icon style="color: cornflowerblue;">assignment</mat-icon>
         </button>
         <button class="editButton" mat-button (click)="openEdit(element.id)" [disabled]="!isLogged()">
