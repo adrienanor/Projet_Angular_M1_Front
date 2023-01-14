@@ -17,7 +17,7 @@ export class AuthService {
       let util = this.utilisateurService.getUtilisateur(nomUtil, mdp)
       .subscribe(data => {
         console.log(data);
-      if (data.nomUtil == nomUtil) {
+      if (data?.nomUtil == nomUtil) {
         this.admin = data.isAdmin;
         this.loggedIn = true;
         console.log("0 "+this.loggedIn);

@@ -38,10 +38,11 @@ import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatRadioModule} from "@angular/material/radio";
 import {MatStepperModule} from "@angular/material/stepper"
 import {MatDialogModule} from "@angular/material/dialog";
-import { RegisterUserComponent } from './utilisateurs/register-user/register-user.component';
+import { ConnexionComponent } from './utilisateurs/connexion/connexion.component';
 import {MatTabsModule} from "@angular/material/tabs";
 import {MatSelectModule} from "@angular/material/select";
 import { AddMatiereComponent } from './matieres/add-matiere/add-matiere.component';
+import {InscriptionComponent} from "./utilisateurs/inscription/inscription.component";
 
 export const MY_FORMAT: MatDateFormats = {
   parse: {
@@ -61,7 +62,8 @@ const routes:Routes = [
   {path: 'add', component: AddAssignmentComponent, canActivate: [AuthGuard]},
   {path: 'add-matiere', component: AddMatiereComponent, canActivate: [AuthGuard]},
   {path: 'assignment/:id', component: AssignmentsDetailsComponent},
-  {path: 'register', component: RegisterUserComponent},
+  {path: 'connexion', component: ConnexionComponent},
+  {path: 'inscription', component: InscriptionComponent},
   {
     path: 'assignment/:id/edit',
     component: EditAssignmentComponent,
@@ -75,8 +77,9 @@ const routes:Routes = [
     RenduDirective,
     AddAssignmentComponent,
     EditAssignmentComponent,
-    RegisterUserComponent,
+    ConnexionComponent,
     AddMatiereComponent,
+    InscriptionComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,59 @@
+<div class="login-page">
+  <mat-card class="mat-elevation-z12">
+    <mat-card-title style="text-align:center;">Inscription</mat-card-title>
+    <mat-card-content>
+      <form (ngSubmit)="SignIn()" *ngIf="!isLoggedIn">
+        <mat-form-field>
+          <input
+            matInput
+            placeholder="Utilisateur"
+            [formControl]="userFormControl"
+            name="nomUtil">
+          <mat-error *ngIf="userFormControl.hasError('required')">
+            Le nom d'utilisateur est <strong>requis</strong>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input
+            matInput
+            [type]="hide ? 'password' : 'text'"
+            placeholder="Mot de passe"
+            [formControl]="passwordFormControl"
+            type="password"
+            name="mdp">
+          <button mat-icon-button matSuffix (click)="hide = !hide; $event.preventDefault()" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+            <mat-icon class="visible">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+          <mat-error *ngIf="passwordFormControl.hasError('required')">
+            Le mot de passe est <strong>requis</strong>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input
+            matInput
+            [type]="hide ? 'password' : 'text'"
+            placeholder="Confirmation du mot de passe"
+            [formControl]="passwordFormControl"
+            type="password"
+            name="remdp">
+          <button mat-icon-button matSuffix (click)="hide = !hide; $event.preventDefault()" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+            <mat-icon class="visible">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+          <mat-error *ngIf="passwordFormControl.hasError('required')">
+            Le mot de passe est <strong>requis</strong>
+          </mat-error>
+        </mat-form-field>
+
+        <button
+          mat-raised-button
+          color="primary"
+          type="submit"
+          class="login-button">
+          S'inscrire
+        </button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

@@ -4,11 +4,11 @@ import {Router} from "@angular/router";
 import {FormControl, Validators} from "@angular/forms";
 
 @Component({
-  selector: 'app-register-user',
-  templateUrl: './register-user.component.html',
-  styleUrls: ['./register-user.component.css']
+  selector: 'app-connexion',
+  templateUrl: './connexion.component.html',
+  styleUrls: ['./connexion.component.css']
 })
-export class RegisterUserComponent {
+export class ConnexionComponent {
   hide = true;
 
   userFormControl = new FormControl('', [Validators.required]);

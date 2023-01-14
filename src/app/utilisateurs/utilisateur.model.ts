@@ -1,7 +1,7 @@
 export class Utilisateur
 {
   _id!:string;
-  nomUtil!:string;
-  mdp!:string;
+  nomUtil!:string | null;
+  mdp!:string | null;
   isAdmin!:boolean;
 }

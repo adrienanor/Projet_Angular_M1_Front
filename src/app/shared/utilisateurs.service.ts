@@ -30,7 +30,7 @@ export class UtilisateursService {
   // renvoie comme Observable l'utilisateur dont le nomUtil et le mdp sont passés
   // en paramètre, ou undefined s'il n'existe pas
   getUtilisateur(nomUtil:string, mdp:string):Observable<Utilisateur> {
-    this.utilisateur = nomUtil;
+    this.setNomUtilisateur(nomUtil);
     console.log("get by nomUtil = "+nomUtil)
     return this.http.get<Utilisateur>(this.url + "/" + nomUtil + "/" +mdp)
       .pipe(map(a => {
@@ -50,6 +50,18 @@ export class UtilisateursService {
 
       return of(result as T);
     }
+  }
+
+  addUtilisateur(utilisateur:Utilisateur):Observable<any> {
+    return this.http.post<Utilisateur>(this.url, utilisateur, this.HttpOptions);
+  }
+
+  setNomUtilisateur(value: string) {
+    this.utilisateur = value;
+  }
+
+  get nomUtilisateur() {
+    return this.utilisateur;
   }
 
 }
