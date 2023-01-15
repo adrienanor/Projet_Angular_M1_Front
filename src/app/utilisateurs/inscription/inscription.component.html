@@ -35,15 +35,12 @@
             matInput
             [type]="hide ? 'password' : 'text'"
             placeholder="Confirmation du mot de passe"
-            [formControl]="passwordFormControl"
+            [formControl]="confirmPasswordFormControl"
             type="password"
             name="remdp">
           <button mat-icon-button matSuffix (click)="hide = !hide; $event.preventDefault()" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
             <mat-icon class="visible">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
           </button>
-          <mat-error *ngIf="passwordFormControl.hasError('required')">
-            Le mot de passe est <strong>requis</strong>
-          </mat-error>
         </mat-form-field>
 
         <button

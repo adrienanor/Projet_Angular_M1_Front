@@ -11,6 +11,7 @@ import { AuthService } from 'src/app/shared/auth.service';
 import {Matiere} from "../matieres/matiere.model";
 import {MatieresService} from "../shared/matieres.service";
 import {AssignmentsDetailsComponent} from "./assignments-details/assignments-details.component";
+import {MatSnackBar, MatSnackBarConfig} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-assignments',
@@ -31,12 +32,14 @@ export class AssignmentsComponent implements OnInit, AfterViewInit {
   hasNextPage!: boolean;
   nextPage!: number;
   checked = "";
+  config = new MatSnackBarConfig();
 
   @ViewChild(MatSort) sort!: MatSort
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(private assignmentsService: AssignmentsService,
               public dialog: MatDialog,
+              private _snackBar: MatSnackBar,
               private matiereService: MatieresService,
               private authService:AuthService) {
     this.refreshTable();
@@ -60,6 +63,11 @@ export class AssignmentsComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     if(!this.dataSource) return;
+
+    this.config.duration = 5000;
+    this.config.horizontalPosition = 'right';
+    this.config.verticalPosition = 'bottom';
+
     this.dataSource.filterPredicate = (data, filter: string) => {
       //return data.nom.toLowerCase().includes(filter);
       console.log(filter);
@@ -124,6 +132,8 @@ export class AssignmentsComponent implements OnInit, AfterViewInit {
   onDelete(id: number) {
     this.assignmentsService.getAssignment(id).subscribe((assignment) => {
       if (!assignment) return;
+
+      this._snackBar.open('Suppression du devoir : '+ assignment.nom +' ', '', this.config);
 
       this.assignmentsService
         .deleteAssignement(assignment)

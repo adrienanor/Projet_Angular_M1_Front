@@ -4,6 +4,12 @@ import {AuthService} from "../../shared/auth.service";
 import {Utilisateur} from "../utilisateur.model";
 import {UtilisateursService} from "../../shared/utilisateurs.service";
 import {Router} from "@angular/router";
+import {
+  MatSnackBar,
+  MatSnackBarConfig,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition
+} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-inscription',
@@ -15,25 +21,39 @@ export class InscriptionComponent implements OnInit {
 
   userFormControl = new FormControl('', [Validators.required]);
   passwordFormControl = new FormControl('', [Validators.required]);
+  confirmPasswordFormControl = new FormControl('', [Validators.required]);
+
+  config = new MatSnackBarConfig();
+
 
   constructor(private authService: AuthService,
               private router:Router,
+              private _snackBar: MatSnackBar,
               private utilisateursService:UtilisateursService) { }
 
   ngOnInit(): void {
+    this.config.duration = 5000;
+    this.config.horizontalPosition = 'right';
+    this.config.verticalPosition = 'bottom';
   }
 
   SignIn(){
-    const newUtilisateur = new Utilisateur();
-    newUtilisateur.nomUtil = this.userFormControl.value;
-    newUtilisateur.mdp = this.passwordFormControl.value;
+    if(this.passwordFormControl.value == this.confirmPasswordFormControl.value) {
+      const newUtilisateur = new Utilisateur();
+      newUtilisateur.nomUtil = this.userFormControl.value;
+      newUtilisateur.mdp = this.passwordFormControl.value;
 
-    this.utilisateursService.addUtilisateur(newUtilisateur)
-      .subscribe(message => {
-        console.log(message);
-        this.router.navigate(['/home']);
-      });
 
+      this._snackBar.open('Inscription de '+ newUtilisateur.nomUtil, '', this.config);
+
+      this.utilisateursService.addUtilisateur(newUtilisateur)
+        .subscribe(message => {
+          console.log(message);
+          this.router.navigate(['/home']);
+        });
+    } else {
+      this._snackBar.open('Les mots de passe ne correspondent pas', '', this.config);
+    }
   }
 
   get isLoggedIn() {

@@ -5,6 +5,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {map, Observable} from "rxjs";
 import {Matiere} from "../../matieres/matiere.model";
 import {MatieresService} from "../../shared/matieres.service";
+import {MatSnackBar, MatSnackBarConfig} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-edit-assignment',
@@ -21,10 +22,12 @@ export class EditAssignmentComponent implements OnInit {
   note!: number;
   remarque!: string;
   matieres!: Observable<Matiere[]>;
+  config = new MatSnackBarConfig();
 
   constructor(
     private assignmentsService: AssignmentsService,
     public dialogRef: MatDialogRef<EditAssignmentComponent>,
+    private _snackBar: MatSnackBar,
     private matieresService:MatieresService,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
@@ -32,6 +35,10 @@ export class EditAssignmentComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.config.duration = 5000;
+    this.config.horizontalPosition = 'right';
+    this.config.verticalPosition = 'bottom';
+
     this.getAssignment();
   }
 
@@ -56,6 +63,9 @@ export class EditAssignmentComponent implements OnInit {
     this.assignment.matiere = this.matiere;
     this.assignment.remarque = this.remarque;
     this.assignment.note = this.note;
+
+    this._snackBar.open('Modification du devoir : '+ this.assignment.nom +' ', '', this.config);
+
     this.assignmentsService
       .updateAssignment(this.assignment)
       .subscribe((message) => {

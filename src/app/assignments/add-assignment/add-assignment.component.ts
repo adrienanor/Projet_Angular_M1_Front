@@ -8,6 +8,7 @@ import {Matiere} from "../../matieres/matiere.model";
 import {MatieresService} from "../../shared/matieres.service";
 import {map, Observable} from "rxjs";
 import {UtilisateursService} from "../../shared/utilisateurs.service";
+import {MatSnackBar, MatSnackBarConfig} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-add-assignment',
@@ -28,12 +29,17 @@ export class AddAssignmentComponent implements OnInit {
   secondFormGroup!: FormGroup;
   thirdFormGroup!: FormGroup;
   matieres!: Observable<Matiere[]>;
+  config = new MatSnackBarConfig();
 
   constructor(private assignmentsService:AssignmentsService, private formBuilder: FormBuilder,
-              private utilisteurService: UtilisateursService,
+              private utilisteurService: UtilisateursService, private _snackBar: MatSnackBar,
               private router:Router, private matieresService:MatieresService) {}
 
   ngOnInit() {
+    this.config.duration = 5000;
+    this.config.horizontalPosition = 'right';
+    this.config.verticalPosition = 'bottom';
+
     this.firstFormGroup = this.formBuilder.group({
       firstCtrl: ['', Validators.required]
     });
@@ -55,6 +61,9 @@ export class AddAssignmentComponent implements OnInit {
     newAssignment.auteur = this.utilisteurService.utilisateur;
     newAssignment.matiere = this.matiere;
     newAssignment.rendu = false;
+
+    this._snackBar.open('Ajout du devoir : '+ newAssignment.nom +' ', '', this.config);
+
 
     this.assignmentsService.addAssignment(newAssignment)
       .subscribe(message => {

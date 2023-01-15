@@ -43,6 +43,7 @@ import {MatTabsModule} from "@angular/material/tabs";
 import {MatSelectModule} from "@angular/material/select";
 import { AddMatiereComponent } from './matieres/add-matiere/add-matiere.component';
 import {InscriptionComponent} from "./utilisateurs/inscription/inscription.component";
+import {MatSnackBar, MatSnackBarModule} from "@angular/material/snack-bar";
 
 export const MY_FORMAT: MatDateFormats = {
   parse: {
@@ -91,7 +92,7 @@ const routes:Routes = [
     FormsModule, HttpClientModule,
     RouterModule.forRoot(routes), MatToolbarModule, MatSidenavModule, MatTableModule,
     MatSortModule, MatPaginatorModule, MatRadioModule, MatStepperModule, ReactiveFormsModule,
-    MatDialogModule, MatTabsModule, MatOptionModule, MatSelectModule,
+    MatDialogModule, MatTabsModule, MatOptionModule, MatSelectModule, MatSnackBarModule
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'fr-FR' },
