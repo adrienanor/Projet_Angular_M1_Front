@@ -64,10 +64,6 @@ export class AssignmentsComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     if(!this.dataSource) return;
 
-    this.config.duration = 5000;
-    this.config.horizontalPosition = 'right';
-    this.config.verticalPosition = 'bottom';
-
     this.dataSource.filterPredicate = (data, filter: string) => {
       //return data.nom.toLowerCase().includes(filter);
       console.log(filter);
@@ -132,6 +128,10 @@ export class AssignmentsComponent implements OnInit, AfterViewInit {
   onDelete(id: number) {
     this.assignmentsService.getAssignment(id).subscribe((assignment) => {
       if (!assignment) return;
+
+      this.config.duration = 5000;
+      this.config.horizontalPosition = 'right';
+      this.config.verticalPosition = 'bottom';
 
       this._snackBar.open('Suppression du devoir : '+ assignment.nom +' ', '', this.config);
 

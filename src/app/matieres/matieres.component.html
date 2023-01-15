@@ -1,0 +1,16 @@
+<mat-card>
+  <h1 style="padding-left: 20px">Liste des matières :</h1>
+  <mat-card-content>
+    <div *ngFor="let matiere of matieres| async">
+      <mat-accordion>
+        <mat-expansion-panel style="width: 50%">
+          <mat-expansion-panel-header>
+            <mat-panel-title>{{ matiere.nom }}</mat-panel-title>
+          </mat-expansion-panel-header>
+          <p>Professeur : {{ matiere.professeur }}</p>
+          <img [src]="matiere.image" style="width: 200px; height: 200px;  object-fit: contain;">
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+  </mat-card-content>
+</mat-card>

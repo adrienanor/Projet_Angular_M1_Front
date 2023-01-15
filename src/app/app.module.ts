@@ -44,6 +44,8 @@ import {MatSelectModule} from "@angular/material/select";
 import { AddMatiereComponent } from './matieres/add-matiere/add-matiere.component';
 import {InscriptionComponent} from "./utilisateurs/inscription/inscription.component";
 import {MatSnackBar, MatSnackBarModule} from "@angular/material/snack-bar";
+import {MatieresComponent} from "./matieres/matieres.component";
+import {MatExpansionModule} from "@angular/material/expansion";
 
 export const MY_FORMAT: MatDateFormats = {
   parse: {
@@ -65,6 +67,7 @@ const routes:Routes = [
   {path: 'assignment/:id', component: AssignmentsDetailsComponent},
   {path: 'connexion', component: ConnexionComponent},
   {path: 'inscription', component: InscriptionComponent},
+  {path: 'matieres', component: MatieresComponent},
   {
     path: 'assignment/:id/edit',
     component: EditAssignmentComponent,
@@ -80,7 +83,8 @@ const routes:Routes = [
     EditAssignmentComponent,
     ConnexionComponent,
     AddMatiereComponent,
-    InscriptionComponent
+    InscriptionComponent,
+    MatieresComponent
   ],
   imports: [
     BrowserModule,
@@ -92,7 +96,7 @@ const routes:Routes = [
     FormsModule, HttpClientModule,
     RouterModule.forRoot(routes), MatToolbarModule, MatSidenavModule, MatTableModule,
     MatSortModule, MatPaginatorModule, MatRadioModule, MatStepperModule, ReactiveFormsModule,
-    MatDialogModule, MatTabsModule, MatOptionModule, MatSelectModule, MatSnackBarModule
+    MatDialogModule, MatTabsModule, MatOptionModule, MatSelectModule, MatSnackBarModule, MatExpansionModule
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'fr-FR' },
