@@ -19,7 +19,7 @@ export class AssignmentsService {
   constructor(private logginService:LoggingService,
               private http:HttpClient) { }
 
-  url = "https://front-projet-angular.onrender.com//api/assignments";
+  url = "https://front-projet-angular.onrender.com/api/assignments";
 
   getAssignments():Observable<Assignment[]> {
     return this.http.get<Assignment[]>(this.url)
