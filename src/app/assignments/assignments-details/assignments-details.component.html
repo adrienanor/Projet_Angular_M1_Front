@@ -5,7 +5,10 @@
   <h2>Matière : {{assignmentTransmis.matiere.nom}}</h2>
   <h2>Professeur : {{assignmentTransmis.matiere.professeur}}</h2>
   <img [src]="assignmentTransmis.matiere.image" style="width: 200px; height: 200px;  object-fit: contain;">
-  <h2>Rendu : {{assignmentTransmis.rendu ? 'Oui' : 'Non'}}</h2>
+  <h2>Rendu :
+    <mat-icon *ngIf="assignmentTransmis.rendu" style="color: green;">cancel</mat-icon>
+    <mat-icon *ngIf="!assignmentTransmis.rendu" style="color: red;">cancel</mat-icon>
+  </h2>
   <h2 *ngIf="assignmentTransmis.note">Note : {{assignmentTransmis.note}}</h2>
   <h2 *ngIf="assignmentTransmis.remarque">Remarque : {{assignmentTransmis.remarque}}</h2>
 </div>
