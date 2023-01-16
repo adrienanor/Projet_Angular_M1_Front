@@ -20,7 +20,7 @@ Cependant, si vous voulez vous connecter en tant qu'**administrateur**, utilisez
 **• Mot de passe** : admin
 <br><br><br>
 
-# Fonctionnalité de l'applicatiob web 
+# Fonctionnalité de l'application web 
 Nous avons tout implémenter sauf l'authentification grâce au Tokens. 
 Nous sommes capables de nous inscrire et nous connecter. Quand nous nous inscrivons, nous rajoutons l'utilisateur dans la base de données. Quand on se connecte, on regarde dans notre base de données si notre utilisateur existe. 
 <br><br>
