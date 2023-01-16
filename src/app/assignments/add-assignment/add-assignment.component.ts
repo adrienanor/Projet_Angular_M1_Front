@@ -30,6 +30,7 @@ export class AddAssignmentComponent implements OnInit {
   thirdFormGroup!: FormGroup;
   matieres!: Observable<Matiere[]>;
   config = new MatSnackBarConfig();
+  assignments: Assignment[] = [];
 
   constructor(private assignmentsService:AssignmentsService, private formBuilder: FormBuilder,
               private utilisteurService: UtilisateursService, private _snackBar: MatSnackBar,
@@ -50,12 +51,13 @@ export class AddAssignmentComponent implements OnInit {
       thirdCtrl: ['', Validators.required]
     });
     this.matieres = this.matieresService.getMatieres().pipe(map(matieres => Object.values(matieres)));
+    this.assignmentsService.getAssignments().subscribe(assignments => this.assignments = assignments);
   }
 
   onSubmit() {
     console.log(this.nomDevoir + ' a rendre le ' + this.dateDeRendu);
     const newAssignment = new Assignment();
-    newAssignment.id = Math.floor(Math.random() * 1000);
+    newAssignment.id = this.assignments.lastIndexOf(this.assignments[this.assignments.length - 1]) + 2;
     newAssignment.nom = this.nomDevoir;
     newAssignment.dateDeRendu = this.dateDeRendu;
     newAssignment.auteur = this.utilisteurService.utilisateur;
