@@ -20,7 +20,7 @@ export class UtilisateursService {
   constructor(private logginService:LoggingService,
               private http:HttpClient) { }
 
-  url = "http://localhost:8010/api/utilisateurs";
+  url = "https://front-projet-angular.onrender.com//api/utilisateurs";
 
   getUtilisateurs():Observable<Utilisateur[]> {
     return this.http.get<Utilisateur[]>(this.url)

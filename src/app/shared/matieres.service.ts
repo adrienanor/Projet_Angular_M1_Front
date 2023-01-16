@@ -18,7 +18,7 @@ export class MatieresService{
   constructor(private logginService:LoggingService,
               private http:HttpClient) {}
 
-  url = "http://localhost:8010/api/matieres";
+  url = "https://front-projet-angular.onrender.com//api/matieres";
 
   getMatieres():Observable<Matiere[]> {
     return this.http.get<Matiere[]>(this.url)
