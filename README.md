@@ -11,7 +11,7 @@ Pour avoir accès à notre application web, veuillez cliquer sur le lien suivant
 
 # Se connecter à l'application web
 
-Une fois dans l'application, si vous voulez vous connecter en tant qu'**élève**, suivez la procèdure d'inscription en cliquant sur le bouton "S'inscrire".
+Une fois dans l'application, si vous voulez vous connecter en tant qu'**élève**, suivez la procèdure d'inscription en cliquant sur le bouton **"S'inscrire"**.
 <br><br>
 Cependant, si vous voulez vous connecter en tant qu'**administrateur**, utilisez les identifiants suivant : 
 <br><br>
