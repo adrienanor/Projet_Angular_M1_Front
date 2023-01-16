@@ -44,6 +44,7 @@ export class InscriptionComponent implements OnInit {
       newUtilisateur.nomUtil = this.userFormControl.value;
       newUtilisateur.mdp = this.passwordFormControl.value;
       newUtilisateur.email = this.emailFormControl.value;
+      newUtilisateur.isAdmin = false;
 
       this._snackBar.open('Inscription de '+ newUtilisateur.nomUtil, '', this.config);
 
