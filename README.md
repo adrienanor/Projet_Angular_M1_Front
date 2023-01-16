@@ -20,5 +20,18 @@ Cependant, si vous voulez vous connecter en tant qu'**administrateur**, utilisez
 **• Mot de passe** : admin
 <br><br><br>
 
+# Fonctionnalité de l'applicatiob web 
+Nous avons tout implémenter sauf l'authentification grâce au Tokens. 
+Nous sommes capables de nous inscrire et nous connecter. Quand nous nous inscrivons, nous rajoutons l'utilisateur dans la base de données. Quand on se connecte, on regarde dans notre base de données si notre utilisateur existe. 
+<br><br>
+Si je ne suis pas connecté : Je suis capable de regarder le détaillé des rendus et de les trier, mais aussi je peux accéder à la liste des matières et des élèves. 
+<br>
+Si je suis connecté en tant qu'élève : Je suis capable de faire en plus la modification des rendus et d'ajouter un devoir ou une matière. 
+<br>
+Si je suis connecté en tant qu'administrateur : Je suis capable de faire en plus une suppression des rendus. 
+
+
+
+<br><br><br>
 # Lien de la vidéo de présentation de notre application web
 Lien : 
