@@ -6,7 +6,7 @@ Voici le repository du front end de notre projet web.<br><br><br>
 
 # Lien de l'application web 
 
-Pour avoir accès à notre application web, veuillez cliquer sur le lien suivant : LIEN.
+Pour avoir accès à notre application web, veuillez cliquer sur le lien suivant : https://front-projet-angular.onrender.com/
  <br><br><br>
 
 # Se connecter à l'application web
