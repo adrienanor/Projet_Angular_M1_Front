@@ -6,6 +6,7 @@
     <mat-nav-list>
       <a mat-list-item routerLink="/home" routerLinkActive="active">Liste des devoirs</a>
       <a mat-list-item routerLink="/matieres" routerLinkActive="active">Liste des matières</a>
+      <a mat-list-item routerLink="/utilisateurs" routerLinkActive="active">Liste des élèves</a>
       <a *ngIf="isLoggedIn" mat-list-item routerLink="/add" routerLinkActive="active">Ajouter un devoir</a>
       <a *ngIf="isLoggedIn" mat-list-item routerLink="/add-matiere" routerLinkActive="active">Ajouter une matière</a>
     </mat-nav-list>

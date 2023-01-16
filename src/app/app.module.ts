@@ -46,6 +46,7 @@ import {InscriptionComponent} from "./utilisateurs/inscription/inscription.compo
 import {MatSnackBar, MatSnackBarModule} from "@angular/material/snack-bar";
 import {MatieresComponent} from "./matieres/matieres.component";
 import {MatExpansionModule} from "@angular/material/expansion";
+import {UtilisateursComponent} from "./utilisateurs/utilisateurs.component";
 
 export const MY_FORMAT: MatDateFormats = {
   parse: {
@@ -68,6 +69,7 @@ const routes:Routes = [
   {path: 'connexion', component: ConnexionComponent},
   {path: 'inscription', component: InscriptionComponent},
   {path: 'matieres', component: MatieresComponent},
+  {path: 'utilisateurs', component: UtilisateursComponent},
   {
     path: 'assignment/:id/edit',
     component: EditAssignmentComponent,
@@ -84,7 +86,8 @@ const routes:Routes = [
     ConnexionComponent,
     AddMatiereComponent,
     InscriptionComponent,
-    MatieresComponent
+    MatieresComponent,
+    UtilisateursComponent
   ],
   imports: [
     BrowserModule,

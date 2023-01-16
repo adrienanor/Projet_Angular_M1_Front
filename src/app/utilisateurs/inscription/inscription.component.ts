@@ -22,6 +22,7 @@ export class InscriptionComponent implements OnInit {
   userFormControl = new FormControl('', [Validators.required]);
   passwordFormControl = new FormControl('', [Validators.required]);
   confirmPasswordFormControl = new FormControl('', [Validators.required]);
+  emailFormControl = new FormControl('', [Validators.required, Validators.email]);
 
   config = new MatSnackBarConfig();
 
@@ -42,13 +43,14 @@ export class InscriptionComponent implements OnInit {
       const newUtilisateur = new Utilisateur();
       newUtilisateur.nomUtil = this.userFormControl.value;
       newUtilisateur.mdp = this.passwordFormControl.value;
-
+      newUtilisateur.email = this.emailFormControl.value;
 
       this._snackBar.open('Inscription de '+ newUtilisateur.nomUtil, '', this.config);
 
       this.utilisateursService.addUtilisateur(newUtilisateur)
         .subscribe(message => {
           console.log(message);
+          console.log(newUtilisateur)
           this.router.navigate(['/home']);
         });
     } else {

@@ -4,4 +4,5 @@ export class Utilisateur
   nomUtil!:string | null;
   mdp!:string | null;
   isAdmin!:boolean;
+  email!:string | null;
 }

@@ -64,4 +64,12 @@ export class UtilisateursService {
     return this.utilisateur;
   }
 
+  getUtilisateursPagine(page: number, limit: number): Observable<any> {
+    const queryParams = {
+      page: page,
+      limit: limit
+    }
+    return this.http.get<Utilisateur[]>(this.url, { params: queryParams });
+  }
+
 }

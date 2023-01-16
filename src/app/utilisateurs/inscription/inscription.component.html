@@ -17,6 +17,17 @@
         <mat-form-field>
           <input
             matInput
+            placeholder="Email"
+            [formControl]="emailFormControl"
+            name="email">
+          <mat-error *ngIf="emailFormControl.hasError('required')">
+            L'email est <strong>requis</strong>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input
+            matInput
             [type]="hide ? 'password' : 'text'"
             placeholder="Mot de passe"
             [formControl]="passwordFormControl"
