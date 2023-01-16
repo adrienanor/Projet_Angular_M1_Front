@@ -35,14 +35,13 @@ export class ConnexionComponent {
 
     setTimeout(() => {
       this.isLogged();
-    }, 300);
+    }, 350);
   }
 
   isLogged()
   {
     console.log("2 " +this.authService.loggedIn)
     if (this.authService.loggedIn){
-      this.authService.setLoggedIn(true);
       this.router.navigate(['/home']);
     }
   }

@@ -46,6 +46,7 @@ export class AddMatiereComponent implements OnInit {
     const newMatiere = new Matiere();
     newMatiere.nom = this.nomMatiere;
     newMatiere.professeur = this.nomProfesseur;
+    newMatiere.image = 'assets/images/avatar.jpg';
 
     this._snackBar.open('Ajout de la matière : '+ newMatiere.nom +' ', '', this.config);
 
